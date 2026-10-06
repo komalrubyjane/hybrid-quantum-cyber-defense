@@ -1,0 +1,89 @@
+{
+  "scenario_id": "synthetic-basic-001",
+  "data_origin": "SYNTHETIC",
+  "notice": "SYNTHETIC DATA - hand-authored development fixture. Not derived from real traffic. Never report results on it as real-world results.",
+  "description": "Five-stage multi-stage scenario: Initial Access -> Execution -> Credential Access -> Lateral Movement -> Exfiltration. IPs are RFC 5737 documentation ranges; hostnames use the reserved .test TLD.",
+  "technique_labels_validated_against_kb": false,
+  "events": [
+    {
+      "event_type": "api",
+      "event_id": "syn-001-e01",
+      "timestamp": "2026-01-15T09:00:00Z",
+      "source_dataset": "synthetic-basic",
+      "data_origin": "SYNTHETIC",
+      "entity_id": "web-01.example.test",
+      "ground_truth_label": "exploit_public_facing_app",
+      "client_id": "203.0.113.50",
+      "endpoint": "/api/v1/upload",
+      "method": "POST",
+      "status_code": 500,
+      "src_ip": "203.0.113.50",
+      "bytes_out": 512
+    },
+    {
+      "event_type": "system",
+      "event_id": "syn-001-e02",
+      "timestamp": "2026-01-15T09:02:30Z",
+      "source_dataset": "synthetic-basic",
+      "data_origin": "SYNTHETIC",
+      "entity_id": "web-01.example.test",
+      "ground_truth_label": "unix_shell_execution",
+      "host": "web-01.example.test",
+      "action": "process_start",
+      "process_name": "sh",
+      "user": "www-data",
+      "details": {"parent_process": "app-server"}
+    },
+    {
+      "event_type": "authentication",
+      "event_id": "syn-001-e03",
+      "timestamp": "2026-01-15T09:10:00Z",
+      "source_dataset": "synthetic-basic",
+      "data_origin": "SYNTHETIC",
+      "entity_id": "web-01.example.test",
+      "ground_truth_label": "password_guessing",
+      "user": "svc-backup",
+      "outcome": "FAILURE",
+      "src_ip": "192.0.2.10",
+      "target_host": "db-01.example.test",
+      "auth_method": "ssh"
+    },
+    {
+      "event_type": "authentication",
+      "event_id": "syn-001-e04",
+      "timestamp": "2026-01-15T09:14:00Z",
+      "source_dataset": "synthetic-basic",
+      "data_origin": "SYNTHETIC",
+      "entity_id": "db-01.example.test",
+      "ground_truth_label": "remote_service_ssh",
+      "user": "svc-backup",
+      "outcome": "SUCCESS",
+      "src_ip": "192.0.2.10",
+      "target_host": "db-01.example.test",
+      "auth_method": "ssh"
+    },
+    {
+      "event_type": "network_flow",
+      "event_id": "syn-001-e05",
+      "timestamp": "2026-01-15T09:30:00Z",
+      "source_dataset": "synthetic-basic",
+      "data_origin": "SYNTHETIC",
+      "entity_id": "db-01.example.test",
+      "ground_truth_label": "exfiltration_over_c2",
+      "src_ip": "192.0.2.20",
+      "dst_ip": "198.51.100.77",
+      "src_port": 50432,
+      "dst_port": 443,
+      "protocol": "tcp",
+      "duration_s": 840.0,
+      "features": {"total_fwd_bytes": 52428800.0, "total_bwd_bytes": 20480.0, "fwd_packets": 36000.0}
+    }
+  ],
+  "expected_chain": [
+    {"event_id": "syn-001-e01", "technique_id": "T1190",     "tactic_id": "TA0001", "note": "Exploit Public-Facing Application"},
+    {"event_id": "syn-001-e02", "technique_id": "T1059.004", "tactic_id": "TA0002", "note": "Command and Scripting Interpreter: Unix Shell"},
+    {"event_id": "syn-001-e03", "technique_id": "T1110.001", "tactic_id": "TA0006", "note": "Brute Force: Password Guessing"},
+    {"event_id": "syn-001-e04", "technique_id": "T1021.004", "tactic_id": "TA0008", "note": "Remote Services: SSH"},
+    {"event_id": "syn-001-e05", "technique_id": "T1041",     "tactic_id": "TA0010", "note": "Exfiltration Over C2 Channel"}
+  ]
+}

@@ -1,0 +1,4 @@
+# Data manifest: one entry per downloaded or generated artifact.
+# Fields: id, source_url, version, retrieved_at (ISO-8601 UTC), sha256, license, local_path, notes
+schema_version: 1
+artifacts: []   # nothing downloaded yet (Milestone 1)

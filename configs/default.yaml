@@ -1,0 +1,21 @@
+# Default configuration. Environment variables (HQC_*, ATTACK_VERSION) and .env
+# override these values. See backend/hqc/config/settings.py.
+environment: development
+seed: 42
+
+# PLANNED version; unverified until Milestone 2 checks the official ATT&CK release.
+attack_version: "19.2"
+attack_domain: enterprise-attack
+
+data_dir: data
+models_dir: models
+reports_dir: reports
+db_path: data/hqc.sqlite3
+
+log_level: INFO
+log_json: true
+
+api_host: 127.0.0.1
+api_port: 8000
+cors_origins:
+  - http://localhost:5173
