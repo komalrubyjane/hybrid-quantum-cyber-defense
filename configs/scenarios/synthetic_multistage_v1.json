@@ -1,0 +1,71 @@
+{
+  "scenario_id": "synthetic-multistage",
+  "version": "1",
+  "data_origin": "SYNTHETIC",
+  "notice": "SYNTHETIC DATA - hand-authored integration fixture. Events, detector scores and ATT&CK annotations are invented for pipeline testing; no model produced the scores and no real attack is described. Never report results on it as real-world results.",
+  "description": "Linux web server compromise: Initial Access (T1190) -> Execution (T1059.004) -> Persistence (T1098.004) -> Credential Access (T1003.008) -> Lateral Movement (T1021.004) -> Exfiltration (T1041); plus one unrelated failed login (standalone) and one benign request without technique evidence (unmapped). Technique IDs are active in ATT&CK 19.2 and each annotated tactic is a tactic of its technique in the 19.2 knowledge base. None of the five consecutive technique transitions occurs in the project's Attack Flow corpus: the chain is a plausible synthetic construction, not a documented incident. IPs are RFC 5737 documentation ranges; hostnames use the reserved .test TLD.",
+  "attack_version": "19.2",
+  "as_of": "2026-01-15T09:35:00Z",
+  "resources": [
+    {"resource_id": "web-01.example.test", "resource_type": "web_server", "criticality": "MEDIUM", "owner": "synthetic-web-team", "environment": "synthetic-lab"},
+    {"resource_id": "db-01.example.test", "resource_type": "database_server", "criticality": "HIGH", "owner": "synthetic-data-team", "environment": "synthetic-lab"}
+  ],
+  "observations": [
+    {
+      "event": {"event_type": "api", "event_id": "syn-ms-e01", "timestamp": "2026-01-15T09:00:00Z", "source_dataset": "synthetic-multistage", "data_origin": "SYNTHETIC", "entity_id": "web-01.example.test", "client_id": "203.0.113.50", "endpoint": "/api/v1/upload", "method": "POST", "status_code": 500, "src_ip": "203.0.113.50", "bytes_out": 512},
+      "detection": {"p_malicious": 0.91, "quantum_p_malicious": 0.80},
+      "annotations": [{"technique_id": "T1190", "tactic_id": "TA0001", "confidence": 0.9, "evidence": ["synthetic: crafted upload request to a public endpoint followed by a server error"]}]
+    },
+    {
+      "event": {"event_type": "api", "event_id": "syn-ms-e02", "timestamp": "2026-01-15T09:01:00Z", "source_dataset": "synthetic-multistage", "data_origin": "SYNTHETIC", "entity_id": "web-01.example.test", "client_id": "198.51.100.10", "endpoint": "/index.html", "method": "GET", "status_code": 200, "src_ip": "198.51.100.10", "bytes_out": 2048},
+      "detection": {"p_malicious": 0.04}
+    },
+    {
+      "event": {"event_type": "system", "event_id": "syn-ms-e03", "timestamp": "2026-01-15T09:02:30Z", "source_dataset": "synthetic-multistage", "data_origin": "SYNTHETIC", "entity_id": "web-01.example.test", "host": "web-01.example.test", "action": "process_start", "process_name": "sh", "user": "www-data", "details": {"parent_process": "app-server"}},
+      "detection": {"p_malicious": 0.62, "quantum_p_malicious": 0.35},
+      "annotations": [{"technique_id": "T1059.004", "tactic_id": "TA0002", "confidence": 0.85, "evidence": ["synthetic: interactive shell spawned by the web application server process"]}]
+    },
+    {
+      "event": {"event_type": "system", "event_id": "syn-ms-e04", "timestamp": "2026-01-15T09:06:00Z", "source_dataset": "synthetic-multistage", "data_origin": "SYNTHETIC", "entity_id": "web-01.example.test", "host": "web-01.example.test", "action": "file_modify", "process_name": "sh", "user": "www-data", "details": {"path": "/home/svc-backup/.ssh/authorized_keys"}},
+      "detection": {"p_malicious": 0.45, "quantum_p_malicious": 0.72},
+      "annotations": [{"technique_id": "T1098.004", "tactic_id": "TA0003", "confidence": 0.6, "evidence": ["synthetic: authorized_keys of a service account modified by the web server user (low-confidence annotation)"]}]
+    },
+    {
+      "event": {"event_type": "system", "event_id": "syn-ms-e05", "timestamp": "2026-01-15T09:09:00Z", "source_dataset": "synthetic-multistage", "data_origin": "SYNTHETIC", "entity_id": "web-01.example.test", "host": "web-01.example.test", "action": "file_read", "process_name": "cat", "user": "www-data", "details": {"path": "/etc/shadow"}},
+      "detection": {"p_malicious": 0.77, "quantum_p_malicious": 0.74},
+      "annotations": [{"technique_id": "T1003.008", "tactic_id": "TA0006", "confidence": 0.8, "evidence": ["synthetic: /etc/shadow read by the web server user"]}]
+    },
+    {
+      "event": {"event_type": "authentication", "event_id": "syn-ms-e06", "timestamp": "2026-01-15T09:14:00Z", "source_dataset": "synthetic-multistage", "data_origin": "SYNTHETIC", "entity_id": "web-01.example.test", "user": "svc-backup", "outcome": "SUCCESS", "src_ip": "192.0.2.10", "target_host": "db-01.example.test", "auth_method": "ssh"},
+      "detection": {"p_malicious": 0.55},
+      "annotations": [{"technique_id": "T1021.004", "tactic_id": "TA0008", "confidence": 0.75, "evidence": ["synthetic: SSH login from the web server to the database server as the service account"]}]
+    },
+    {
+      "event": {"event_type": "authentication", "event_id": "syn-ms-e07", "timestamp": "2026-01-15T09:20:00Z", "source_dataset": "synthetic-multistage", "data_origin": "SYNTHETIC", "entity_id": "mail-01.example.test", "user": "alice", "outcome": "FAILURE", "src_ip": "192.0.2.99", "target_host": "mail-01.example.test", "auth_method": "imap"},
+      "detection": {"p_malicious": 0.30},
+      "annotations": [{"technique_id": "T1110.001", "tactic_id": "TA0006", "confidence": 0.4, "evidence": ["synthetic: single failed mailbox login (weak, unrelated evidence)"]}]
+    },
+    {
+      "event": {"event_type": "network_flow", "event_id": "syn-ms-e08", "timestamp": "2026-01-15T09:30:00Z", "source_dataset": "synthetic-multistage", "data_origin": "SYNTHETIC", "entity_id": "db-01.example.test", "src_ip": "192.0.2.20", "dst_ip": "198.51.100.77", "src_port": 50432, "dst_port": 443, "protocol": "tcp", "duration_s": 840.0, "features": {"total_fwd_bytes": 52428800.0, "total_bwd_bytes": 20480.0}},
+      "detection": {"p_malicious": 0.88, "quantum_p_malicious": 0.83},
+      "annotations": [{"technique_id": "T1041", "tactic_id": "TA0010", "confidence": 0.7, "evidence": ["synthetic: large outbound transfer over the existing encrypted channel"]}]
+    }
+  ],
+  "expected": {
+    "chains": [
+      {"event_ids": ["syn-ms-e01", "syn-ms-e03", "syn-ms-e04", "syn-ms-e05", "syn-ms-e06", "syn-ms-e08"], "status": "CORRELATED"},
+      {"event_ids": ["syn-ms-e07"], "status": "STANDALONE"}
+    ],
+    "unmapped_event_ids": ["syn-ms-e02"],
+    "evidence_status": {
+      "syn-ms-e01": "CONSISTENT",
+      "syn-ms-e02": "NO SECOND OPINION",
+      "syn-ms-e03": "CORROBORATED BY INDEPENDENT EVIDENCE",
+      "syn-ms-e04": "NEEDS ADDITIONAL EVIDENCE",
+      "syn-ms-e05": "CONSISTENT",
+      "syn-ms-e06": "NO SECOND OPINION",
+      "syn-ms-e07": "NO SECOND OPINION",
+      "syn-ms-e08": "CONSISTENT"
+    }
+  }
+}

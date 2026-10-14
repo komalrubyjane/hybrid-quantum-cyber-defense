@@ -1,0 +1,35 @@
+# Milestone 7: attack-chain integration, dynamic risk and recommendation-only defense.
+# Reuses stored Milestone 3-6 artifacts; nothing is retrained or re-run.
+attack_version: "19.2"
+vocabulary: models/attack_prediction/vocabulary/technique-vocabulary-attack-19.2.json
+scenario: configs/scenarios/synthetic_multistage_v1.json
+
+prediction:
+  markov_run_id: 20261006T173740Z-markov-baselines-document   # Milestone 3 (B1, M1 fitted on all groups)
+  baseline_model: B1
+  markov_model: M1
+  lstm_run_id: 20261006T181005Z-lstm-hybrid-beam-document     # Milestone 4
+  lstm_fold: fold-00            # its own inner-validation alpha (0.7, also the modal fold choice) is used
+  primary_model: HYBRID
+  top_k: 5
+  beam_width: 10                # as in Milestone 4
+  horizon: 3
+
+evidence:
+  corroboration_min_confidence: 0.7   # independent technique evidence needed to resolve a disagreement
+
+correlation:
+  window_minutes: 120
+  use_accounts: true
+
+risk:                            # risk-policy-v1 (documented in docs/RISK_ENGINE.md; fixed before evaluation)
+  weights: {detection: 25, technique_confidence: 15, tactic_progression: 25,
+            predicted_high_impact: 15, asset_criticality: 10, recency: 10}
+  thresholds: {medium: 25, high: 50, critical: 75}
+  high_impact_tactics: [TA0010, TA0040]
+  default_criticality_value: 0.5
+  recency_half_life_hours: 6
+
+# Version tracking only (stored outputs used by the disagreement-policy check).
+classical_run_id: 20261006T195110Z-classical-detection-cicids2017
+quantum_run_id: 20261007T053257Z-quantum-adjudicator-cicids2017

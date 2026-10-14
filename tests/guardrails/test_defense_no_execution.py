@@ -9,12 +9,14 @@ guardrail cannot pass vacuously.
 from __future__ import annotations
 
 import ast
+import re
 from dataclasses import dataclass
 from pathlib import Path
 
 import pytest
 
 import hqc.defense
+import hqc.risk
 
 pytestmark = pytest.mark.guardrail
 
@@ -75,6 +77,22 @@ FORBIDDEN_MODULES: frozenset[str] = frozenset(
         # dynamic import / code loading that could hide the above
         "importlib",
         "runpy",
+        # Milestone 7 expansion: process control, async subprocess, files and persistence.
+        # The defense package only builds typed recommendations in memory.
+        "os",
+        "shutil",
+        "signal",
+        "sys",
+        "asyncio",
+        "threading",
+        "concurrent",
+        "pickle",
+        "marshal",
+        "joblib",
+        "shelve",
+        "sqlite3",
+        "tempfile",
+        "glob",
     }
 )
 
@@ -102,7 +120,16 @@ FORBIDDEN_ATTRIBUTE_CALLS: frozenset[str] = frozenset(
     }
 )
 FORBIDDEN_PREFIX_CALLS: tuple[str, ...] = ("os.exec", "os.spawn", "os.posix_spawn")
-FORBIDDEN_BUILTINS: frozenset[str] = frozenset({"eval", "exec", "compile", "__import__"})
+FORBIDDEN_BUILTINS: frozenset[str] = frozenset(
+    {"eval", "exec", "compile", "__import__", "open", "breakpoint"}
+)
+# Milestone 7: string literals that look like firewall / account / process / host commands.
+FORBIDDEN_COMMAND_PATTERN = re.compile(
+    r"\b(iptables|ip6tables|nft|ufw|firewall-cmd|netsh|pfctl|usermod|userdel|useradd|chpasswd|"
+    r"passwd|Disable-ADAccount|Set-ADUser|Stop-Process|taskkill|pkill|killall|kill -9|kubectl|"
+    r"systemctl|shutdown|reboot|ip route|route add|sudo|ssh |scp |rm -rf|aws |gcloud |az )",
+    re.IGNORECASE,
+)
 
 
 @dataclass(frozen=True)
@@ -125,6 +152,15 @@ def scan_source(source: str, filename: str = "<string>") -> list[Violation]:
     """Return guardrail violations found in Python source."""
     tree = ast.parse(source, filename=filename)
     found: list[Violation] = []
+    docstrings = {
+        id(n.body[0].value)
+        for n in ast.walk(tree)
+        if isinstance(n, ast.Module | ast.ClassDef | ast.FunctionDef | ast.AsyncFunctionDef)
+        and n.body
+        and isinstance(n.body[0], ast.Expr)
+        and isinstance(n.body[0].value, ast.Constant)
+        and isinstance(n.body[0].value.value, str)
+    }
     for node in ast.walk(tree):
         modules: list[str] = []
         if isinstance(node, ast.Import):
@@ -134,6 +170,16 @@ def scan_source(source: str, filename: str = "<string>") -> list[Violation]:
         for mod in modules:
             if mod.split(".")[0] in FORBIDDEN_MODULES:
                 found.append(Violation(filename, node.lineno, f"forbidden import '{mod}'"))
+        if (
+            isinstance(node, ast.Constant)
+            and isinstance(node.value, str)
+            and id(node) not in docstrings  # prose describing the prohibition is allowed
+        ):
+            match = FORBIDDEN_COMMAND_PATTERN.search(node.value)
+            if match:
+                found.append(
+                    Violation(filename, node.lineno, f"command-like literal {match.group(0)!r}")
+                )
         if isinstance(node, ast.Call):
             name = _dotted(node.func)
             if name is None:
@@ -149,6 +195,13 @@ def scan_source(source: str, filename: str = "<string>") -> list[Violation]:
 
 def _defense_files() -> list[Path]:
     return sorted(DEFENSE_DIR.rglob("*.py"))
+
+
+RISK_DIR = Path(hqc.risk.__file__).parent
+
+
+def _risk_files() -> list[Path]:
+    return sorted(RISK_DIR.rglob("*.py"))
 
 
 def test_defense_package_exists() -> None:
@@ -192,6 +245,17 @@ def test_defense_package_has_no_non_python_executables() -> None:
         "exec('x=1')",
         "__import__('subprocess')",
         "import importlib",
+        "import os",
+        "import asyncio",
+        "from concurrent.futures import ProcessPoolExecutor",
+        "import pickle",
+        "open('/etc/hosts', 'w')",
+        "x = 'iptables -A INPUT -s 1.2.3.4 -j DROP'",
+        "x = 'usermod -L alice'",
+        "x = 'Disable-ADAccount -Identity bob'",
+        "x = 'taskkill /PID 4 /F'",
+        "x = 'kubectl delete pod web'",
+        "x = 'sudo shutdown now'",
     ],
 )
 def test_scanner_detects_violation(snippet: str) -> None:
@@ -205,7 +269,39 @@ def test_scanner_detects_violation(snippet: str) -> None:
         "import math\nx = math.sqrt(2)",
         "from pathlib import Path\np = Path('x')",
         "def recommend(x):\n    return [x]",
+        "x = 'consider isolating the resource pending human approval'",
+        "x = 'consider resetting or disabling the account pending human approval'",
+        '"""Never runs iptables or SSH."""\ndef f():\n    """No sudo here."""',
     ],
 )
 def test_scanner_allows_safe_code(snippet: str) -> None:
     assert scan_source(snippet) == []
+
+
+# --- Milestone 7 expansion -------------------------------------------------------------------
+
+
+@pytest.mark.parametrize("path", _risk_files(), ids=lambda p: p.name)
+def test_risk_module_has_no_execution_paths(path: Path) -> None:
+    violations = scan_source(path.read_text(encoding="utf-8"), str(path))
+    assert not violations, "\n".join(f"{v.file}:{v.line}: {v.detail}" for v in violations)
+
+
+def test_defense_package_contains_the_recommender() -> None:
+    names = {p.name for p in _defense_files()}
+    assert "recommender.py" in names  # the guardrail must actually cover the M7 code
+
+
+def test_defense_recommendations_always_require_human_approval() -> None:
+    from hqc.common.schemas.defense import DefenseRecommendation
+
+    field = DefenseRecommendation.model_fields["requires_human_approval"]
+    assert field.default is True
+    assert str(field.annotation) in {"typing.Literal[True]", "Literal[True]"}
+
+
+def test_defense_service_exposes_no_execution_api() -> None:
+    from hqc.defense import recommender
+
+    public = [n for n in dir(recommender.DefenseRecommendationService) if not n.startswith("_")]
+    assert set(public) == {"planned_actions", "recommend"}

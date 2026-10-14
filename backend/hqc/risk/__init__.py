@@ -1,4 +1,4 @@
 """Explainable, model-derived risk scoring.
 
-Status: planned (Milestone 7).
+Status: implemented (Milestone 7).
 """
