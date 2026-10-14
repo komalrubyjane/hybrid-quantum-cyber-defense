@@ -1,0 +1,53 @@
+# Milestone 4: LSTM, Markov+LSTM fusion and beam search. Loaded by
+# hqc.evaluation.sequence_experiment.load_sequence_config. Fixed BEFORE the real run.
+# Everything is selected on inner validation data inside each outer fold; the outer test
+# group is used only for the final, single evaluation.
+
+seed: 42
+bootstrap_resamples: 10000
+confidence: 0.95
+weighting: document             # training weights (Milestone 3 primary policy)
+markov_config: configs/chain_prediction.yaml   # source of the B1 / M1 / M2 grids
+reference_run: 20261006T173740Z-markov-baselines-document   # Milestone 3 (read-only check)
+
+inner_validation:
+  fraction: 0.2                 # of the outer-training groups that have instances
+  min_groups: 2
+
+lstm:
+  shared:                       # applied to every candidate
+    batch_size: 128
+    max_epochs: 25
+    patience: 3
+    min_delta: 0.0001
+    num_threads: 4
+  # A fixed, pre-registered subset of the Milestone 4 example grid
+  # (embedding {32,64} x hidden {64,128} x layers {1,2} x dropout {0,0.2} x
+  #  lr {1e-3,3e-4} x weight decay {0,1e-4} x context {3,5,10}); chosen for coverage
+  # of every value, not from any result.
+  candidates:
+    - {embedding_dim: 32, hidden_dim: 64,  num_layers: 1, dropout: 0.0, learning_rate: 0.001,  weight_decay: 0.0,    context_length: 5}
+    - {embedding_dim: 32, hidden_dim: 64,  num_layers: 1, dropout: 0.2, learning_rate: 0.001,  weight_decay: 0.0001, context_length: 3}
+    - {embedding_dim: 32, hidden_dim: 64,  num_layers: 1, dropout: 0.2, learning_rate: 0.001,  weight_decay: 0.0001, context_length: 10}
+    - {embedding_dim: 64, hidden_dim: 128, num_layers: 1, dropout: 0.2, learning_rate: 0.001,  weight_decay: 0.0001, context_length: 5}
+    - {embedding_dim: 64, hidden_dim: 128, num_layers: 1, dropout: 0.0, learning_rate: 0.0003, weight_decay: 0.0,    context_length: 10}
+    - {embedding_dim: 64, hidden_dim: 128, num_layers: 2, dropout: 0.2, learning_rate: 0.001,  weight_decay: 0.0001, context_length: 5}
+    - {embedding_dim: 32, hidden_dim: 128, num_layers: 2, dropout: 0.2, learning_rate: 0.0003, weight_decay: 0.0001, context_length: 10}
+    - {embedding_dim: 64, hidden_dim: 64,  num_layers: 1, dropout: 0.2, learning_rate: 0.0003, weight_decay: 0.0,    context_length: 3}
+
+fusion_alphas: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+
+beam_search:
+  beam_width: 10
+  horizons: [2, 3]              # H = 1 is the single-step evaluation
+  hit_ks: [1, 5, 10]
+  models: [B1, MARKOV, LSTM, HYBRID]
+
+comparisons:
+  - [LSTM, B1]
+  - [LSTM, M2]
+  - [LSTM, MARKOV]
+  - [HYBRID, B1]
+  - [HYBRID, LSTM]
+  - [HYBRID, MARKOV]
+  - [MARKOV, B1]
