@@ -1,0 +1,3 @@
+chain_id,status,observed,top_next,risk_score,risk_level,evidence_status,recommendations
+chain-syn-ms-e01,CORRELATED,T1190 -> T1059.004 -> T1098.004 -> T1003.008 -> T1021.004 -> T1041,"{""technique_id"": ""T1105"", ""probability"": 0.0904}",76.45,CRITICAL,NEEDS ADDITIONAL EVIDENCE,"[""escalate_severity"", ""restrict_communication"", ""collect_additional_evidence"", ""increase_monitoring""]"
+chain-syn-ms-e07,STANDALONE,T1110.001,"{""technique_id"": ""T1105"", ""probability"": 0.0238}",44.38,MEDIUM,NO SECOND OPINION,"[""collect_additional_evidence"", ""increase_monitoring""]"

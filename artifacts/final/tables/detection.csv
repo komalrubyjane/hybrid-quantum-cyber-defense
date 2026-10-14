@@ -1,0 +1,9 @@
+model,feature_set,subset,n,accuracy,precision,recall,f1,roc_auc,pr_auc,benign_false_positive_rate
+logreg,full,all_test_rows,1162213,0.8392,0.8206,0.4582,0.588,0.7184,0.6426,0.0335
+logreg,full,test_rows_not_in_train,1092754,0.8379,0.8729,0.4582,0.6009,0.7249,0.6614,0.0242
+random_forest,full,all_test_rows,1162213,0.8202,0.9955,0.2834,0.4412,0.8097,0.69,0.0004
+random_forest,full,test_rows_not_in_train,1092754,0.8089,0.9979,0.2834,0.4414,0.8075,0.7011,0.0002
+logreg,no_destination_port,all_test_rows,1162213,0.8049,0.5926,0.7073,0.6449,0.9008,0.7144,0.1625
+logreg,no_destination_port,test_rows_not_in_train,1035943,0.8135,0.6538,0.7099,0.6807,0.9136,0.7602,0.1462
+random_forest,no_destination_port,all_test_rows,1162213,0.8119,0.9892,0.2517,0.4012,0.8893,0.7116,0.0009
+random_forest,no_destination_port,test_rows_not_in_train,1035943,0.7902,0.9927,0.2526,0.4027,0.8907,0.7413,0.0007
