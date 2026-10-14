@@ -1,0 +1,21 @@
+# Milestone 5: classical binary intrusion detection on CIC-IDS2017 (GeneratedLabelledFlows).
+# Fixed BEFORE the real run. No hyperparameter search; no test-set tuning or selection.
+seed: 42
+dataset_dir: data/external/cicids2017      # extracted by scripts/register_cicids2017.py
+threshold: 0.5                             # fixed decision threshold (not tuned)
+
+# Option A (approved): whole-day holdout. Test days contain attack types that never occur
+# in the training days (web attacks, infiltration, botnet, port scan, DDoS).
+train_days: [Monday, Tuesday, Wednesday]
+test_days: [Thursday, Friday]
+
+models:
+  - {name: logreg, seed: 42, logreg_max_iter: 1000, logreg_c: 1.0}
+  - {name: random_forest, seed: 42, rf_n_estimators: 100, rf_min_samples_leaf: 2, rf_max_features: sqrt}
+
+# Feature sets: primary keeps destination_port (shortcut risk); ablation drops it.
+ablation_drop_destination_port: true
+
+# Optional RBF SVM: NOT run in Milestone 5 (prediction on ~1.1M test flows is impractical;
+# Milestone 6 compares an RBF-SVM against the quantum kernel on matched small budgets).
+run_rbf_svm: false
