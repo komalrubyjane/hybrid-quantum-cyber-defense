@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pydantic import Field, model_validator
 
-from hqc.common.schemas.base import HQCModel, NonEmptyStr, Probability, Verdict
+from hqc.common.schemas.base import HQCModel, NonEmptyStr, Probability, UTCDatetime, Verdict
 
 
 def confidence_from_probability(p_malicious: float) -> float:
@@ -52,6 +52,22 @@ class DetectionResult(HQCModel):
     family_probabilities: dict[str, Probability] = Field(default_factory=dict)
     quantum: QuantumOpinion | None = None
     latency_ms: float | None = Field(default=None, ge=0.0)
+    # --- Milestone 5 additions (optional; backwards compatible) ---------------------
+    flow_id: str | None = Field(default=None, description="Source flow identifier, if any.")
+    timestamp: UTCDatetime | None = None
+    threshold: Probability | None = Field(
+        default=None, description="Decision threshold applied to p_malicious."
+    )
+    feature_version: str | None = None
+    preprocessing_version: str | None = None
+    uncertainty: Probability | None = Field(
+        default=None, description="1 - confidence for binary decisions (0 = certain)."
+    )
+    dataset_label: str | None = Field(
+        default=None,
+        description="Original dataset label for OFFLINE evaluation only; never a model input.",
+    )
+    evidence: dict[str, str] = Field(default_factory=dict)
 
     @property
     def quantum_agrees(self) -> bool | None:

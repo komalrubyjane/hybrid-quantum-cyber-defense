@@ -1,4 +1,5 @@
-"""Attack-chain prediction: Markov, LSTM, fusion, beam search.
+"""Attack-chain prediction.
 
-Status: planned (Milestones 3-4).
+Implemented: deterministic technique vocabulary (Milestone 2).
+Planned: Markov baseline (Milestone 3), LSTM, fusion, beam search (Milestone 4).
 """

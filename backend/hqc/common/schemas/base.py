@@ -15,6 +15,8 @@ PROBABILITY_SUM_TOLERANCE = 1e-6
 TECHNIQUE_ID_REGEX = r"^T\d{4}(\.\d{3})?$"
 TACTIC_ID_REGEX = r"^TA\d{4}$"
 MITIGATION_ID_REGEX = r"^M\d{4}$"
+DETECTION_STRATEGY_ID_REGEX = r"^DET\d{4}$"
+DATA_COMPONENT_ID_REGEX = r"^DC\d{4}$"
 
 TechniqueId = Annotated[str, StringConstraints(pattern=TECHNIQUE_ID_REGEX)]
 """ATT&CK technique or sub-technique ID, e.g. ``T1059`` or ``T1059.004``.
@@ -23,6 +25,8 @@ Format validation only; existence in the knowledge base is checked by ``hqc.mitr
 """
 TacticId = Annotated[str, StringConstraints(pattern=TACTIC_ID_REGEX)]
 MitigationId = Annotated[str, StringConstraints(pattern=MITIGATION_ID_REGEX)]
+DetectionStrategyId = Annotated[str, StringConstraints(pattern=DETECTION_STRATEGY_ID_REGEX)]
+DataComponentId = Annotated[str, StringConstraints(pattern=DATA_COMPONENT_ID_REGEX)]
 NonEmptyStr = Annotated[str, StringConstraints(min_length=1, strip_whitespace=True)]
 Probability = Annotated[float, Field(ge=0.0, le=1.0, allow_inf_nan=False)]
 
@@ -71,6 +75,7 @@ class StepProvenance(StrEnum):
     """How an attack-chain step became known."""
 
     OBSERVED = "OBSERVED"  # directly supported by a security event
+    DOCUMENTED = "DOCUMENTED"  # explicitly encoded in curated CTI source data (e.g. Attack Flow)
     INFERRED = "INFERRED"  # derived by reasoning/mapping, not directly observed
     PREDICTED = "PREDICTED"  # model forecast of a future step
 

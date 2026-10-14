@@ -68,3 +68,10 @@ class DefenseRecommendation(HQCModel):
     requires_human_approval: Literal[True] = True
     status: RecommendationStatus = RecommendationStatus.PROPOSED
     created_at: UTCDatetime = Field(default_factory=utc_now)
+    # --- Milestone 7 additions (optional; backwards compatible) ---------------------
+    chain_id: str | None = None
+    policy_version: str | None = None
+    approval_note: str = Field(
+        default="RECOMMENDATION ONLY - requires human approval; the system executes nothing.",
+        min_length=1,
+    )

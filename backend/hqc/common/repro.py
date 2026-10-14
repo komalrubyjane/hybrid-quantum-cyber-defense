@@ -1,6 +1,7 @@
 """Reproducibility helpers: seeding, environment capture, git commit lookup.
 
-The git lookup reads ``.git`` files directly instead of spawning a process.
+The commit lookup reads ``.git`` files directly; the dirty-tree check runs
+``git status --porcelain`` with a fixed argument list (no shell).
 """
 
 from __future__ import annotations
@@ -8,6 +9,7 @@ from __future__ import annotations
 import os
 import platform
 import random
+import subprocess
 import sys
 from importlib import import_module, metadata
 from pathlib import Path
@@ -91,3 +93,31 @@ def git_commit(repo_dir: Path) -> str | None:
             if len(parts) == 2 and parts[1] == ref:
                 return parts[0]
     return None
+
+
+GIT_STATUS_TIMEOUT_S = 10
+
+
+def git_working_tree_dirty(repo_dir: Path) -> bool | None:
+    """True if ``git status --porcelain`` reports changes, None if git is unavailable.
+
+    Ignored files (datasets, generated artifacts) are not counted. Uses a fixed
+    argument list (no shell). This helper lives in ``hqc.common``; the defense package
+    never runs processes.
+    """
+    if not (repo_dir / ".git").exists():
+        return None
+    try:
+        result = subprocess.run(
+            ["git", "status", "--porcelain"],
+            cwd=repo_dir,
+            capture_output=True,
+            text=True,
+            timeout=GIT_STATUS_TIMEOUT_S,
+            check=False,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if result.returncode != 0:
+        return None
+    return bool(result.stdout.strip())

@@ -11,6 +11,7 @@ from hqc.common.schemas.base import (
     NonEmptyStr,
     Probability,
     RiskLevel,
+    TechniqueId,
     UTCDatetime,
     utc_now,
 )
@@ -42,3 +43,14 @@ class RiskAssessment(HQCModel):
     uncertainty: Probability | None = None
     label: Literal["MODEL-DERIVED RISK SCORE"] = RISK_LABEL
     created_at: UTCDatetime = Field(default_factory=utc_now)
+    # --- Milestone 7 additions (optional; backwards compatible) ---------------------
+    observed_technique_ids: list[TechniqueId] = Field(default_factory=list)
+    predicted_technique_ids: list[TechniqueId] = Field(
+        default_factory=list, description="Top predicted next techniques (PREDICTED, not observed)."
+    )
+    model_versions: dict[str, str] = Field(default_factory=dict)
+    policy_version: str | None = None
+    quantum_disagreement: bool = False
+    evidence_status: str | None = Field(
+        default=None, description="Worst evidence status across the chain's detections."
+    )

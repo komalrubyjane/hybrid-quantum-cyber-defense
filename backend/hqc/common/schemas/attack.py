@@ -7,7 +7,9 @@ from itertools import pairwise
 from pydantic import Field, model_validator
 
 from hqc.common.schemas.base import (
+    DataComponentId,
     DataOrigin,
+    DetectionStrategyId,
     HQCModel,
     MitigationId,
     NonEmptyStr,
@@ -20,8 +22,39 @@ from hqc.common.schemas.base import (
 )
 
 
+class ATTACKTactic(HQCModel):
+    """An ATT&CK tactic. ``order`` is its position in the Enterprise matrix."""
+
+    tactic_id: TacticId
+    name: NonEmptyStr
+    shortname: NonEmptyStr
+    order: int = Field(ge=0)
+    description: str | None = None
+
+
+class ATTACKMitigation(HQCModel):
+    """An ATT&CK mitigation (course-of-action with an ``M####`` ID)."""
+
+    mitigation_id: MitigationId
+    name: NonEmptyStr
+    description: str | None = None
+    technique_ids: list[TechniqueId] = Field(default_factory=list)
+
+
+class ATTACKDataComponent(HQCModel):
+    """An ATT&CK data component (``DC####``) referenced by detection analytics."""
+
+    component_id: DataComponentId
+    name: NonEmptyStr
+
+
 class ATTACKTechnique(HQCModel):
-    """One ATT&CK (sub-)technique as stored in the local knowledge base."""
+    """One ATT&CK (sub-)technique as stored in the local knowledge base.
+
+    Since ATT&CK v18, data sources are deprecated; detection coverage is expressed as
+    detection strategies (``DET####``) whose analytics reference data components
+    (``DC####``). Both are recorded here instead of the legacy data-source list.
+    """
 
     technique_id: TechniqueId
     name: NonEmptyStr
@@ -29,11 +62,21 @@ class ATTACKTechnique(HQCModel):
     is_subtechnique: bool
     parent_id: TechniqueId | None = None
     description: str | None = None
+    platforms: list[str] = Field(default_factory=list)
     mitigation_ids: list[MitigationId] = Field(default_factory=list)
-    data_sources: list[str] = Field(default_factory=list)
+    detection_strategy_ids: list[DetectionStrategyId] = Field(default_factory=list)
+    data_component_ids: list[DataComponentId] = Field(default_factory=list)
     deprecated: bool = False
     revoked: bool = False
+    revoked_by: TechniqueId | None = None
+    stix_id: str | None = None
+    url: str | None = None
     attack_version: NonEmptyStr
+
+    @property
+    def is_active(self) -> bool:
+        """Neither revoked nor deprecated."""
+        return not (self.revoked or self.deprecated)
 
     @model_validator(mode="after")
     def _hierarchy_consistent(self) -> ATTACKTechnique:

@@ -1,8 +1,17 @@
-# Exact pins for Milestone 1 runtime dependencies (Python 3.11).
-# Verified with: pip install -e ".[dev]" && pytest  (2026-10-06)
-# Ranges live in pyproject.toml; ML / PyTorch / Qiskit are added in later milestones.
+# Exact pins for runtime dependencies through Milestone 6 (Python 3.11).
+# Verified with: pip install -e ".[dev,quantum]" && pytest  (2026-10-07)
+# Ranges live in pyproject.toml; qiskit / qiskit-aer are the optional "quantum" extra.
 pydantic==2.13.5
 pydantic-settings==2.15.0
 PyYAML==6.0.3
 fastapi==0.142.2
 uvicorn==0.54.0
+certifi==2026.7.22
+torch==2.14.1  # CPU wheel (macOS arm64); no CUDA packages
+numpy==2.4.6
+pandas==3.0.6
+scikit-learn==1.9.1
+joblib==1.6.0  # model persistence (imported directly)
+scipy==1.17.1
+qiskit==2.5.2  # Milestone 6 (Apache-2.0)
+qiskit-aer==0.17.2  # Milestone 6 noise study (Apache-2.0)

@@ -53,3 +53,19 @@ class RecordNotFoundError(HQCError, KeyError):
 
 class StorageError(HQCError):
     """A storage operation violated a storage rule (e.g. overwriting a write-once record)."""
+
+
+class MalformedSourceDataError(HQCError, ValueError):
+    """External source data (ATT&CK STIX, Attack Flow, manifests) is structurally invalid."""
+
+
+class MissingRequiredFieldError(MalformedSourceDataError):
+    """A required field is absent from external source data."""
+
+
+class UnknownTechniqueError(InvalidTechniqueIdError):
+    """A well-formed technique ID that does not exist in the loaded ATT&CK knowledge base."""
+
+
+class UntrustedSourceError(HQCError, ValueError):
+    """A download URL is not on the allowlist of official sources."""
