@@ -1,0 +1,91 @@
+{
+ "scope": "API + M7 pipeline + analyst decisions (in-memory API state; SYNTHETIC scenario)",
+ "passed": true,
+ "checks": [
+  {
+   "check": "only GET/POST routes exist",
+   "passed": true,
+   "detail": "['get', 'post']"
+  },
+  {
+   "check": "no execution route exists",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "services load from stored artifacts",
+   "passed": true,
+   "detail": "alpha=0.7 x LSTM + (1-alpha) x M1 (alpha = fold-00 inner-validation choice)"
+  },
+  {
+   "check": "assessment submitted (201)",
+   "passed": true,
+   "detail": "asm-b5ba9a52501a4ab4"
+  },
+  {
+   "check": "chain has 6 OBSERVED steps",
+   "passed": true,
+   "detail": "T1190 -> T1059.004 -> T1098.004 -> T1003.008 -> T1021.004 -> T1041"
+  },
+  {
+   "check": "predictions are PREDICTED (never observed)",
+   "passed": true,
+   "detail": "top next T1105 0.0904"
+  },
+  {
+   "check": "risk is MODEL-DERIVED and matches the M7 run",
+   "passed": true,
+   "detail": "76.4492 CRITICAL NEEDS ADDITIONAL EVIDENCE"
+  },
+  {
+   "check": "all recommendations PROPOSED and require human approval",
+   "passed": true,
+   "detail": "6 recommendations"
+  },
+  {
+   "check": "disruptive actions withheld on unresolved disagreement",
+   "passed": true,
+   "detail": "escalate_severity, restrict_communication, collect_additional_evidence, increase_monitoring"
+  },
+  {
+   "check": "HIGH-disruption approval without acknowledgement -> 409",
+   "passed": true,
+   "detail": "HIGH-disruption recommendations must be ACKNOWLEDGED before APPROVED"
+  },
+  {
+   "check": "acknowledge then approve recorded (201, executed: false)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "rejection recorded (executed: false)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "stored recommendations stay PROPOSED after decisions",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "decision history is the audit trail",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "audit log is append-only (DELETE rejected)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "invalid request -> 422 without internal paths",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "unknown assessment -> 404",
+   "passed": true,
+   "detail": ""
+  }
+ ]
+}

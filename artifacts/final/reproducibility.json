@@ -1,0 +1,184 @@
+{
+ "classes": {
+  "A": "directly reproducible from existing artifacts",
+  "B": "reproducible by re-running an existing evaluation",
+  "C": "documented but not currently reproducible",
+  "D": "synthetic / demo only"
+ },
+ "results": [
+  {
+   "result": "M3 Markov baselines",
+   "class": "B",
+   "how": "python evaluation/run_markov_baseline.py (recorded runtime 103 s; needs the downloaded ATT&CK 19.2 bundle and Attack Flow corpus; checksums in data/MANIFEST.yaml)",
+   "stored": "metrics, predictions, fitted B1/M1/M2 artifacts"
+  },
+  {
+   "result": "M4 LSTM / hybrid / beam search",
+   "class": "B",
+   "how": "python evaluation/run_sequence_models.py (CPU, seeded; recorded runtime 518 s); checkpoints for 36 folds stored",
+   "stored": "metrics, training history, predictions, fold checkpoints"
+  },
+  {
+   "result": "M5 CIC-IDS2017 detectors",
+   "class": "B",
+   "how": "manual registration download of GeneratedLabelledFlows.zip (SHA-256 verified), then scripts/register_cicids2017.py and evaluation/run_classical_detection.py (recorded runtime 193 s)",
+   "stored": "metrics, per-row test predictions, model artifacts"
+  },
+  {
+   "result": "M6 quantum second opinion",
+   "class": "B",
+   "how": "python evaluation/run_quantum_adjudicator.py (recorded runtime 962 s; needs the M5 run and models)",
+   "stored": "metrics, band predictions, adjudicator artifacts"
+  },
+  {
+   "result": "M7 integration demonstration",
+   "class": "D",
+   "how": "python evaluation/run_integration_demo.py (recorded runtime 1.4 s); SYNTHETIC scenario only",
+   "stored": "results, integration checks, END_TO_END record"
+  },
+  {
+   "result": "All tables and figures in artifacts/final",
+   "class": "A",
+   "how": "python evaluation/build_final_report.py (reads the stored runs only)",
+   "stored": "this directory"
+  }
+ ],
+ "runs": [
+  {
+   "milestone": "M3",
+   "run_id": "20261006T173740Z-markov-baselines-document",
+   "git_commit": "c2813d4dafa586b75d1111bc16b2517b752e111d",
+   "working_tree_dirty": true,
+   "seed": 42,
+   "files": [
+    "config.json",
+    "metrics.json",
+    "predictions.json",
+    "summary.md"
+   ]
+  },
+  {
+   "milestone": "M4",
+   "run_id": "20261006T181005Z-lstm-hybrid-beam-document",
+   "git_commit": "c2813d4dafa586b75d1111bc16b2517b752e111d",
+   "working_tree_dirty": true,
+   "seed": 42,
+   "files": [
+    "config.json",
+    "metrics.json",
+    "predictions.json",
+    "summary.md",
+    "training_history.json"
+   ]
+  },
+  {
+   "milestone": "M5",
+   "run_id": "20261006T195110Z-classical-detection-cicids2017",
+   "git_commit": "c2813d4dafa586b75d1111bc16b2517b752e111d",
+   "working_tree_dirty": true,
+   "seed": 42,
+   "files": [
+    "config.json",
+    "metrics.json",
+    "predictions.json",
+    "summary.md"
+   ]
+  },
+  {
+   "milestone": "M6",
+   "run_id": "20261007T053257Z-quantum-adjudicator-cicids2017",
+   "git_commit": "c2813d4dafa586b75d1111bc16b2517b752e111d",
+   "working_tree_dirty": true,
+   "seed": 42,
+   "files": [
+    "config.json",
+    "metrics.json",
+    "predictions.json",
+    "summary.md"
+   ]
+  },
+  {
+   "milestone": "M7",
+   "run_id": "20261007T083826Z-integration-synthetic-multistage",
+   "git_commit": "c2813d4dafa586b75d1111bc16b2517b752e111d",
+   "working_tree_dirty": true,
+   "seed": null,
+   "files": [
+    "config.json",
+    "results.json",
+    "summary.md"
+   ]
+  }
+ ],
+ "data_artifacts": [
+  {
+   "id": "attack-enterprise-19.2-kb",
+   "kind": "PROCESSED",
+   "version": "19.2",
+   "files_expected": 1,
+   "files_present": 1,
+   "checksums_verified": 1,
+   "checksums_match": true
+  },
+  {
+   "id": "attack-enterprise-19.2-stix",
+   "kind": "RAW",
+   "version": "19.2",
+   "files_expected": 1,
+   "files_present": 1,
+   "checksums_verified": 1,
+   "checksums_match": true
+  },
+  {
+   "id": "attack-flow-corpus-sequences",
+   "kind": "PROCESSED",
+   "version": "main@8b6ca28bc13b",
+   "files_expected": 1,
+   "files_present": 1,
+   "checksums_verified": 1,
+   "checksums_match": true
+  },
+  {
+   "id": "attack-flow-corpus-stix",
+   "kind": "RAW",
+   "version": "main@8b6ca28bc13b",
+   "files_expected": 41,
+   "files_present": 41,
+   "checksums_verified": 41,
+   "checksums_match": true
+  },
+  {
+   "id": "cicids2017-generated-labelled-flows-csv",
+   "kind": "PROCESSED",
+   "version": "zip-sha256-7bdbef286f88",
+   "files_expected": 8,
+   "files_present": 8,
+   "checksums_verified": 8,
+   "checksums_match": true
+  },
+  {
+   "id": "cicids2017-generated-labelled-flows-zip",
+   "kind": "RAW",
+   "version": "CIC-IDS2017 (UNB CIC, July 2017 capture)",
+   "files_expected": 1,
+   "files_present": 1,
+   "checksums_verified": 1,
+   "checksums_match": true
+  },
+  {
+   "id": "technique-vocabulary-attack-19.2",
+   "kind": "DERIVED",
+   "version": "v1-attack-19.2-f42457f4db96",
+   "files_expected": 1,
+   "files_present": 1,
+   "checksums_verified": 1,
+   "checksums_match": true
+  }
+ ],
+ "source_fingerprint": {
+  "files": 128,
+  "sha256": "68f1c9b5770fb2aaf3d747171951fe9c6e45eeb72dfee31e70165720047dbbab",
+  "note": "fingerprint of the working tree at report time (code is uncommitted)"
+ },
+ "caveat": "Every stored run records git commit c2813d4 with a dirty working tree: the code that produced M3-M7 is the uncommitted working tree, not a commit."
+}

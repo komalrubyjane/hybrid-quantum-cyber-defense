@@ -1,0 +1,53 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='760' height='420' viewBox='0 0 760 420' font-family='Helvetica, Arial, sans-serif'>
+<title>Next-technique prediction: MRR</title>
+<rect width='760' height='420' fill='white'/>
+<text x='380.0' y='22' text-anchor='middle' font-size='15' font-weight='bold'>Next-technique prediction: MRR</text>
+<line x1='80' y1='50' x2='80' y2='340' stroke='#333'/>
+<line x1='80' y1='340' x2='740' y2='340' stroke='#333'/>
+<line x1='76' y1='340.0' x2='740' y2='340.0' stroke='#e5e5e5'/>
+<text x='74.0' y='344.0' font-size='10' text-anchor='end' fill='#222'>0.00</text>
+<line x1='76' y1='282.0' x2='740' y2='282.0' stroke='#e5e5e5'/>
+<text x='74.0' y='286.0' font-size='10' text-anchor='end' fill='#222'>0.04</text>
+<line x1='76' y1='224.0' x2='740' y2='224.0' stroke='#e5e5e5'/>
+<text x='74.0' y='228.0' font-size='10' text-anchor='end' fill='#222'>0.07</text>
+<line x1='76' y1='166.0' x2='740' y2='166.0' stroke='#e5e5e5'/>
+<text x='74.0' y='170.0' font-size='10' text-anchor='end' fill='#222'>0.11</text>
+<line x1='76' y1='108.0' x2='740' y2='108.0' stroke='#e5e5e5'/>
+<text x='74.0' y='112.0' font-size='10' text-anchor='end' fill='#222'>0.14</text>
+<line x1='76' y1='50.0' x2='740' y2='50.0' stroke='#e5e5e5'/>
+<text x='74.0' y='54.0' font-size='10' text-anchor='end' fill='#222'>0.18</text>
+<text x='36.0' y='195.0' font-size='11' text-anchor='middle' fill='#222' transform='rotate(-90 36 195.0)'>MRR</text>
+<text x='135.0' y='358.0' font-size='11' text-anchor='middle' fill='#222'>B0</text>
+<text x='245.0' y='358.0' font-size='11' text-anchor='middle' fill='#222'>B1</text>
+<text x='355.0' y='358.0' font-size='11' text-anchor='middle' fill='#222'>M1</text>
+<text x='465.0' y='358.0' font-size='11' text-anchor='middle' fill='#222'>M2</text>
+<text x='575.0' y='358.0' font-size='11' text-anchor='middle' fill='#222'>LSTM</text>
+<text x='685.0' y='358.0' font-size='11' text-anchor='middle' fill='#222'>HYBRID</text>
+<line x1='135.0' y1='324.4' x2='135.0' y2='296.2' stroke='#4c72b0' stroke-width='1.6'/>
+<line x1='131.0' y1='324.4' x2='139.0' y2='324.4' stroke='#4c72b0'/>
+<line x1='131.0' y1='296.2' x2='139.0' y2='296.2' stroke='#4c72b0'/>
+<circle cx='135.0' cy='313.3' r='4' fill='#4c72b0'/>
+<line x1='245.0' y1='198.4' x2='245.0' y2='89.3' stroke='#4c72b0' stroke-width='1.6'/>
+<line x1='241.0' y1='198.4' x2='249.0' y2='198.4' stroke='#4c72b0'/>
+<line x1='241.0' y1='89.3' x2='249.0' y2='89.3' stroke='#4c72b0'/>
+<circle cx='245.0' cy='145.9' r='4' fill='#4c72b0'/>
+<line x1='355.0' y1='206.1' x2='355.0' y2='120.1' stroke='#4c72b0' stroke-width='1.6'/>
+<line x1='351.0' y1='206.1' x2='359.0' y2='206.1' stroke='#4c72b0'/>
+<line x1='351.0' y1='120.1' x2='359.0' y2='120.1' stroke='#4c72b0'/>
+<circle cx='355.0' cy='164.2' r='4' fill='#4c72b0'/>
+<line x1='465.0' y1='204.2' x2='465.0' y2='116.2' stroke='#4c72b0' stroke-width='1.6'/>
+<line x1='461.0' y1='204.2' x2='469.0' y2='204.2' stroke='#4c72b0'/>
+<line x1='461.0' y1='116.2' x2='469.0' y2='116.2' stroke='#4c72b0'/>
+<circle cx='465.0' cy='161.2' r='4' fill='#4c72b0'/>
+<line x1='575.0' y1='195.0' x2='575.0' y2='89.0' stroke='#4c72b0' stroke-width='1.6'/>
+<line x1='571.0' y1='195.0' x2='579.0' y2='195.0' stroke='#4c72b0'/>
+<line x1='571.0' y1='89.0' x2='579.0' y2='89.0' stroke='#4c72b0'/>
+<circle cx='575.0' cy='143.8' r='4' fill='#4c72b0'/>
+<line x1='685.0' y1='199.7' x2='685.0' y2='106.2' stroke='#4c72b0' stroke-width='1.6'/>
+<line x1='681.0' y1='199.7' x2='689.0' y2='199.7' stroke='#4c72b0'/>
+<line x1='681.0' y1='106.2' x2='689.0' y2='106.2' stroke='#4c72b0'/>
+<circle cx='685.0' cy='154.9' r='4' fill='#4c72b0'/>
+<circle cx='90' cy='380' r='4' fill='#4c72b0'/>
+<text x='98.0' y='384.0' font-size='11' text-anchor='start' fill='#222'>MRR</text>
+<text x='380.0' y='412.0' font-size='10' text-anchor='middle' fill='#555'>Macro mean over 36 source groups with 95% bootstrap CI (stored M3/M4 runs). Overlapping CIs: no significance implied.</text>
+</svg>

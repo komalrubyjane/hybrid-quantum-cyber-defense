@@ -1,0 +1,34 @@
+{
+ "generator": "evaluation/build_final_report.py",
+ "generated_at": "2026-10-08T03:57:15.009128+00:00",
+ "inputs": {
+  "M3": "reports/runs/20261006T173740Z-markov-baselines-document",
+  "M4": "reports/runs/20261006T181005Z-lstm-hybrid-beam-document",
+  "M5": "reports/runs/20261006T195110Z-classical-detection-cicids2017",
+  "M6": "reports/runs/20261007T053257Z-quantum-adjudicator-cicids2017",
+  "M7": "reports/runs/20261007T083826Z-integration-synthetic-multistage"
+ },
+ "figures": [
+  "01_prediction_top1_top5.svg",
+  "02_prediction_mrr.svg",
+  "03_prediction_log_loss.svg",
+  "04_detection_precision_recall_f1.svg",
+  "05_detection_auc.svg",
+  "06_quantum_matched_budget.svg",
+  "07_quantum_fusion_tradeoff.svg",
+  "08_shot_noise.svg",
+  "09_depolarizing_noise.svg",
+  "10_architecture.svg"
+ ],
+ "tables": [
+  "tables/attack_prediction.csv",
+  "tables/attack_prediction_multistep.csv",
+  "tables/attack_prediction_paired.csv",
+  "tables/detection.csv",
+  "tables/integration.csv",
+  "tables/quantum_fusion.csv",
+  "tables/quantum_matched_budget.csv",
+  "tables/quantum_noise.csv"
+ ],
+ "results_sha256": "94a913a9ae0ec8189edebd807659602d1e28f70ca4fa8e81ab761a5e2f6cb197"
+}

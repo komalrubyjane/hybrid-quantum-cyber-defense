@@ -1,0 +1,65 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='820' height='430' viewBox='0 0 820 430' font-family='Helvetica, Arial, sans-serif'>
+<title>Noise settings (E4): kernel error and balanced accuracy</title>
+<rect width='820' height='430' fill='white'/>
+<text x='410.0' y='22' text-anchor='middle' font-size='15' font-weight='bold'>Noise settings (E4): kernel error and balanced accuracy</text>
+<line x1='80' y1='50' x2='80' y2='330' stroke='#333'/>
+<line x1='80' y1='330' x2='800' y2='330' stroke='#333'/>
+<line x1='76' y1='330.0' x2='800' y2='330.0' stroke='#e5e5e5'/>
+<text x='74.0' y='334.0' font-size='10' text-anchor='end' fill='#222'>0.00</text>
+<line x1='76' y1='274.0' x2='800' y2='274.0' stroke='#e5e5e5'/>
+<text x='74.0' y='278.0' font-size='10' text-anchor='end' fill='#222'>0.20</text>
+<line x1='76' y1='218.0' x2='800' y2='218.0' stroke='#e5e5e5'/>
+<text x='74.0' y='222.0' font-size='10' text-anchor='end' fill='#222'>0.40</text>
+<line x1='76' y1='162.0' x2='800' y2='162.0' stroke='#e5e5e5'/>
+<text x='74.0' y='166.0' font-size='10' text-anchor='end' fill='#222'>0.60</text>
+<line x1='76' y1='106.0' x2='800' y2='106.0' stroke='#e5e5e5'/>
+<text x='74.0' y='110.0' font-size='10' text-anchor='end' fill='#222'>0.80</text>
+<line x1='76' y1='50.0' x2='800' y2='50.0' stroke='#e5e5e5'/>
+<text x='74.0' y='54.0' font-size='10' text-anchor='end' fill='#222'>1.00</text>
+<text x='36.0' y='190.0' font-size='11' text-anchor='middle' fill='#222' transform='rotate(-90 36 190.0)'>value</text>
+<text x='125.0' y='348.0' font-size='10' text-anchor='middle' fill='#222'>shots-256</text>
+<text x='215.0' y='348.0' font-size='10' text-anchor='middle' fill='#222'>shots-1024</text>
+<text x='305.0' y='348.0' font-size='10' text-anchor='middle' fill='#222'>shots-4096</text>
+<text x='395.0' y='348.0' font-size='10' text-anchor='middle' fill='#222'>low-noise-1024</text>
+<text x='485.0' y='348.0' font-size='10' text-anchor='middle' fill='#222'>mid-noise-1024</text>
+<text x='575.0' y='348.0' font-size='10' text-anchor='middle' fill='#222'>mid-noise-ro3-1024</text>
+<text x='665.0' y='348.0' font-size='10' text-anchor='middle' fill='#222'>high-noise-1024</text>
+<text x='755.0' y='348.0' font-size='10' text-anchor='middle' fill='#222'>high-noise-4096</text>
+<rect x='89.0' y='316.9' width='34.0' height='13.1' fill='#4c72b0'/>
+<text x='106.0' y='313.9' font-size='8' text-anchor='middle' fill='#222'>0.047</text>
+<rect x='179.0' y='323.5' width='34.0' height='6.5' fill='#4c72b0'/>
+<text x='196.0' y='320.5' font-size='8' text-anchor='middle' fill='#222'>0.023</text>
+<rect x='269.0' y='326.8' width='34.0' height='3.2' fill='#4c72b0'/>
+<text x='286.0' y='323.8' font-size='8' text-anchor='middle' fill='#222'>0.012</text>
+<rect x='359.0' y='311.5' width='34.0' height='18.5' fill='#4c72b0'/>
+<text x='376.0' y='308.5' font-size='8' text-anchor='middle' fill='#222'>0.066</text>
+<rect x='449.0' y='261.7' width='34.0' height='68.3' fill='#4c72b0'/>
+<text x='466.0' y='258.7' font-size='8' text-anchor='middle' fill='#222'>0.244</text>
+<rect x='539.0' y='246.2' width='34.0' height='83.8' fill='#4c72b0'/>
+<text x='556.0' y='243.2' font-size='8' text-anchor='middle' fill='#222'>0.299</text>
+<rect x='629.0' y='123.0' width='34.0' height='207.0' fill='#4c72b0'/>
+<text x='646.0' y='120.0' font-size='8' text-anchor='middle' fill='#222'>0.739</text>
+<rect x='719.0' y='123.2' width='34.0' height='206.8' fill='#4c72b0'/>
+<text x='736.0' y='120.2' font-size='8' text-anchor='middle' fill='#222'>0.739</text>
+<rect x='90' y='364' width='10' height='10' fill='#4c72b0'/>
+<text x='104.0' y='373.0' font-size='11' text-anchor='start' fill='#222'>rel. kernel error (test)</text>
+<rect x='125.0' y='141.5' width='34.0' height='188.5' fill='#dd8452'/>
+<text x='142.0' y='138.5' font-size='8' text-anchor='middle' fill='#222'>0.673</text>
+<rect x='215.0' y='128.4' width='34.0' height='201.6' fill='#dd8452'/>
+<text x='232.0' y='125.4' font-size='8' text-anchor='middle' fill='#222'>0.720</text>
+<rect x='305.0' y='121.9' width='34.0' height='208.1' fill='#dd8452'/>
+<text x='322.0' y='118.9' font-size='8' text-anchor='middle' fill='#222'>0.743</text>
+<rect x='395.0' y='130.3' width='34.0' height='199.7' fill='#dd8452'/>
+<text x='412.0' y='127.3' font-size='8' text-anchor='middle' fill='#222'>0.713</text>
+<rect x='485.0' y='127.5' width='34.0' height='202.5' fill='#dd8452'/>
+<text x='502.0' y='124.5' font-size='8' text-anchor='middle' fill='#222'>0.723</text>
+<rect x='575.0' y='131.2' width='34.0' height='198.8' fill='#dd8452'/>
+<text x='592.0' y='128.2' font-size='8' text-anchor='middle' fill='#222'>0.710</text>
+<rect x='665.0' y='159.2' width='34.0' height='170.8' fill='#dd8452'/>
+<text x='682.0' y='156.2' font-size='8' text-anchor='middle' fill='#222'>0.610</text>
+<rect x='755.0' y='160.1' width='34.0' height='169.9' fill='#dd8452'/>
+<text x='772.0' y='157.1' font-size='8' text-anchor='middle' fill='#222'>0.607</text>
+<rect x='250' y='364' width='10' height='10' fill='#dd8452'/>
+<text x='264.0' y='373.0' font-size='11' text-anchor='start' fill='#222'>balanced accuracy</text>
+<text x='410.0' y='422.0' font-size='10' text-anchor='middle' fill='#555'>Single seed. Exact statevector balanced accuracy 0.7567.</text>
+</svg>
