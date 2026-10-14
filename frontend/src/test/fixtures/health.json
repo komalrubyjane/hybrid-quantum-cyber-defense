@@ -1,0 +1,10 @@
+{
+ "status": "ok",
+ "service": "hqc",
+ "version": "0.1.0",
+ "schema_version": "1.0",
+ "attack_version": "19.2",
+ "environment": "development",
+ "time": "2026-10-07T20:39:56.944990Z",
+ "defense_mode": "recommendation-only"
+}

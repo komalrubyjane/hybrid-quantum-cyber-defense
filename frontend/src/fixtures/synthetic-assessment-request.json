@@ -1,0 +1,451 @@
+{
+ "observations": [
+  {
+   "event": {
+    "event_id": "syn-ms-e01",
+    "timestamp": "2026-01-15T09:00:00Z",
+    "source_dataset": "synthetic-multistage",
+    "data_origin": "SYNTHETIC",
+    "entity_id": "web-01.example.test",
+    "ground_truth_label": null,
+    "event_type": "api",
+    "client_id": "203.0.113.50",
+    "endpoint": "/api/v1/upload",
+    "method": "POST",
+    "status_code": 500,
+    "src_ip": "203.0.113.50",
+    "bytes_out": 512
+   },
+   "detection": {
+    "event_id": "syn-ms-e01",
+    "timestamp": "2026-01-15T09:00:00Z",
+    "origin": "SYNTHETIC_FIXTURE",
+    "classical_model": "synthetic-fixture-classical",
+    "classical_model_version": "synthetic-multistage@1",
+    "p_malicious": 0.91,
+    "threshold": 0.5,
+    "verdict": "MALICIOUS",
+    "quantum": {
+     "gate_triggered": true,
+     "verdict": "MALICIOUS",
+     "p_malicious": 0.8,
+     "confidence": 0.8,
+     "backend": "synthetic-fixture (no quantum model was run)",
+     "feature_map": "synthetic-fixture",
+     "latency_ms": null
+    },
+    "quantum_disagreement": false,
+    "evidence_status": "CONSISTENT"
+   },
+   "techniques": [
+    {
+     "technique_id": "T1190",
+     "tactic_id": "TA0001",
+     "event_id": "syn-ms-e01",
+     "timestamp": "2026-01-15T09:00:00Z",
+     "confidence": 0.9,
+     "source": "SYNTHETIC_SCENARIO",
+     "evidence": [
+      "synthetic: crafted upload request to a public endpoint followed by a server error"
+     ],
+     "reference": "synthetic-multistage@1",
+     "detection_model": null,
+     "model_version": null
+    }
+   ],
+   "hints": {
+    "incident_id": null,
+    "session_id": null
+   }
+  },
+  {
+   "event": {
+    "event_id": "syn-ms-e02",
+    "timestamp": "2026-01-15T09:01:00Z",
+    "source_dataset": "synthetic-multistage",
+    "data_origin": "SYNTHETIC",
+    "entity_id": "web-01.example.test",
+    "ground_truth_label": null,
+    "event_type": "api",
+    "client_id": "198.51.100.10",
+    "endpoint": "/index.html",
+    "method": "GET",
+    "status_code": 200,
+    "src_ip": "198.51.100.10",
+    "bytes_out": 2048
+   },
+   "detection": {
+    "event_id": "syn-ms-e02",
+    "timestamp": "2026-01-15T09:01:00Z",
+    "origin": "SYNTHETIC_FIXTURE",
+    "classical_model": "synthetic-fixture-classical",
+    "classical_model_version": "synthetic-multistage@1",
+    "p_malicious": 0.04,
+    "threshold": 0.5,
+    "verdict": "BENIGN",
+    "quantum": null,
+    "quantum_disagreement": false,
+    "evidence_status": "NO SECOND OPINION"
+   },
+   "techniques": [],
+   "hints": {
+    "incident_id": null,
+    "session_id": null
+   }
+  },
+  {
+   "event": {
+    "event_id": "syn-ms-e03",
+    "timestamp": "2026-01-15T09:02:30Z",
+    "source_dataset": "synthetic-multistage",
+    "data_origin": "SYNTHETIC",
+    "entity_id": "web-01.example.test",
+    "ground_truth_label": null,
+    "event_type": "system",
+    "host": "web-01.example.test",
+    "action": "process_start",
+    "process_name": "sh",
+    "user": "www-data",
+    "details": {
+     "parent_process": "app-server"
+    }
+   },
+   "detection": {
+    "event_id": "syn-ms-e03",
+    "timestamp": "2026-01-15T09:02:30Z",
+    "origin": "SYNTHETIC_FIXTURE",
+    "classical_model": "synthetic-fixture-classical",
+    "classical_model_version": "synthetic-multistage@1",
+    "p_malicious": 0.62,
+    "threshold": 0.5,
+    "verdict": "MALICIOUS",
+    "quantum": {
+     "gate_triggered": true,
+     "verdict": "BENIGN",
+     "p_malicious": 0.35,
+     "confidence": 0.65,
+     "backend": "synthetic-fixture (no quantum model was run)",
+     "feature_map": "synthetic-fixture",
+     "latency_ms": null
+    },
+    "quantum_disagreement": true,
+    "evidence_status": "CORROBORATED BY INDEPENDENT EVIDENCE"
+   },
+   "techniques": [
+    {
+     "technique_id": "T1059.004",
+     "tactic_id": "TA0002",
+     "event_id": "syn-ms-e03",
+     "timestamp": "2026-01-15T09:02:30Z",
+     "confidence": 0.85,
+     "source": "SYNTHETIC_SCENARIO",
+     "evidence": [
+      "synthetic: interactive shell spawned by the web application server process"
+     ],
+     "reference": "synthetic-multistage@1",
+     "detection_model": null,
+     "model_version": null
+    }
+   ],
+   "hints": {
+    "incident_id": null,
+    "session_id": null
+   }
+  },
+  {
+   "event": {
+    "event_id": "syn-ms-e04",
+    "timestamp": "2026-01-15T09:06:00Z",
+    "source_dataset": "synthetic-multistage",
+    "data_origin": "SYNTHETIC",
+    "entity_id": "web-01.example.test",
+    "ground_truth_label": null,
+    "event_type": "system",
+    "host": "web-01.example.test",
+    "action": "file_modify",
+    "process_name": "sh",
+    "user": "www-data",
+    "details": {
+     "path": "/home/svc-backup/.ssh/authorized_keys"
+    }
+   },
+   "detection": {
+    "event_id": "syn-ms-e04",
+    "timestamp": "2026-01-15T09:06:00Z",
+    "origin": "SYNTHETIC_FIXTURE",
+    "classical_model": "synthetic-fixture-classical",
+    "classical_model_version": "synthetic-multistage@1",
+    "p_malicious": 0.45,
+    "threshold": 0.5,
+    "verdict": "BENIGN",
+    "quantum": {
+     "gate_triggered": true,
+     "verdict": "MALICIOUS",
+     "p_malicious": 0.72,
+     "confidence": 0.72,
+     "backend": "synthetic-fixture (no quantum model was run)",
+     "feature_map": "synthetic-fixture",
+     "latency_ms": null
+    },
+    "quantum_disagreement": true,
+    "evidence_status": "NEEDS ADDITIONAL EVIDENCE"
+   },
+   "techniques": [
+    {
+     "technique_id": "T1098.004",
+     "tactic_id": "TA0003",
+     "event_id": "syn-ms-e04",
+     "timestamp": "2026-01-15T09:06:00Z",
+     "confidence": 0.6,
+     "source": "SYNTHETIC_SCENARIO",
+     "evidence": [
+      "synthetic: authorized_keys of a service account modified by the web server user (low-confidence annotation)"
+     ],
+     "reference": "synthetic-multistage@1",
+     "detection_model": null,
+     "model_version": null
+    }
+   ],
+   "hints": {
+    "incident_id": null,
+    "session_id": null
+   }
+  },
+  {
+   "event": {
+    "event_id": "syn-ms-e05",
+    "timestamp": "2026-01-15T09:09:00Z",
+    "source_dataset": "synthetic-multistage",
+    "data_origin": "SYNTHETIC",
+    "entity_id": "web-01.example.test",
+    "ground_truth_label": null,
+    "event_type": "system",
+    "host": "web-01.example.test",
+    "action": "file_read",
+    "process_name": "cat",
+    "user": "www-data",
+    "details": {
+     "path": "/etc/shadow"
+    }
+   },
+   "detection": {
+    "event_id": "syn-ms-e05",
+    "timestamp": "2026-01-15T09:09:00Z",
+    "origin": "SYNTHETIC_FIXTURE",
+    "classical_model": "synthetic-fixture-classical",
+    "classical_model_version": "synthetic-multistage@1",
+    "p_malicious": 0.77,
+    "threshold": 0.5,
+    "verdict": "MALICIOUS",
+    "quantum": {
+     "gate_triggered": true,
+     "verdict": "MALICIOUS",
+     "p_malicious": 0.74,
+     "confidence": 0.74,
+     "backend": "synthetic-fixture (no quantum model was run)",
+     "feature_map": "synthetic-fixture",
+     "latency_ms": null
+    },
+    "quantum_disagreement": false,
+    "evidence_status": "CONSISTENT"
+   },
+   "techniques": [
+    {
+     "technique_id": "T1003.008",
+     "tactic_id": "TA0006",
+     "event_id": "syn-ms-e05",
+     "timestamp": "2026-01-15T09:09:00Z",
+     "confidence": 0.8,
+     "source": "SYNTHETIC_SCENARIO",
+     "evidence": [
+      "synthetic: /etc/shadow read by the web server user"
+     ],
+     "reference": "synthetic-multistage@1",
+     "detection_model": null,
+     "model_version": null
+    }
+   ],
+   "hints": {
+    "incident_id": null,
+    "session_id": null
+   }
+  },
+  {
+   "event": {
+    "event_id": "syn-ms-e06",
+    "timestamp": "2026-01-15T09:14:00Z",
+    "source_dataset": "synthetic-multistage",
+    "data_origin": "SYNTHETIC",
+    "entity_id": "web-01.example.test",
+    "ground_truth_label": null,
+    "event_type": "authentication",
+    "user": "svc-backup",
+    "outcome": "SUCCESS",
+    "src_ip": "192.0.2.10",
+    "target_host": "db-01.example.test",
+    "auth_method": "ssh"
+   },
+   "detection": {
+    "event_id": "syn-ms-e06",
+    "timestamp": "2026-01-15T09:14:00Z",
+    "origin": "SYNTHETIC_FIXTURE",
+    "classical_model": "synthetic-fixture-classical",
+    "classical_model_version": "synthetic-multistage@1",
+    "p_malicious": 0.55,
+    "threshold": 0.5,
+    "verdict": "MALICIOUS",
+    "quantum": null,
+    "quantum_disagreement": false,
+    "evidence_status": "NO SECOND OPINION"
+   },
+   "techniques": [
+    {
+     "technique_id": "T1021.004",
+     "tactic_id": "TA0008",
+     "event_id": "syn-ms-e06",
+     "timestamp": "2026-01-15T09:14:00Z",
+     "confidence": 0.75,
+     "source": "SYNTHETIC_SCENARIO",
+     "evidence": [
+      "synthetic: SSH login from the web server to the database server as the service account"
+     ],
+     "reference": "synthetic-multistage@1",
+     "detection_model": null,
+     "model_version": null
+    }
+   ],
+   "hints": {
+    "incident_id": null,
+    "session_id": null
+   }
+  },
+  {
+   "event": {
+    "event_id": "syn-ms-e07",
+    "timestamp": "2026-01-15T09:20:00Z",
+    "source_dataset": "synthetic-multistage",
+    "data_origin": "SYNTHETIC",
+    "entity_id": "mail-01.example.test",
+    "ground_truth_label": null,
+    "event_type": "authentication",
+    "user": "alice",
+    "outcome": "FAILURE",
+    "src_ip": "192.0.2.99",
+    "target_host": "mail-01.example.test",
+    "auth_method": "imap"
+   },
+   "detection": {
+    "event_id": "syn-ms-e07",
+    "timestamp": "2026-01-15T09:20:00Z",
+    "origin": "SYNTHETIC_FIXTURE",
+    "classical_model": "synthetic-fixture-classical",
+    "classical_model_version": "synthetic-multistage@1",
+    "p_malicious": 0.3,
+    "threshold": 0.5,
+    "verdict": "BENIGN",
+    "quantum": null,
+    "quantum_disagreement": false,
+    "evidence_status": "NO SECOND OPINION"
+   },
+   "techniques": [
+    {
+     "technique_id": "T1110.001",
+     "tactic_id": "TA0006",
+     "event_id": "syn-ms-e07",
+     "timestamp": "2026-01-15T09:20:00Z",
+     "confidence": 0.4,
+     "source": "SYNTHETIC_SCENARIO",
+     "evidence": [
+      "synthetic: single failed mailbox login (weak, unrelated evidence)"
+     ],
+     "reference": "synthetic-multistage@1",
+     "detection_model": null,
+     "model_version": null
+    }
+   ],
+   "hints": {
+    "incident_id": null,
+    "session_id": null
+   }
+  },
+  {
+   "event": {
+    "event_id": "syn-ms-e08",
+    "timestamp": "2026-01-15T09:30:00Z",
+    "source_dataset": "synthetic-multistage",
+    "data_origin": "SYNTHETIC",
+    "entity_id": "db-01.example.test",
+    "ground_truth_label": null,
+    "event_type": "network_flow",
+    "src_ip": "192.0.2.20",
+    "dst_ip": "198.51.100.77",
+    "src_port": 50432,
+    "dst_port": 443,
+    "protocol": "tcp",
+    "duration_s": 840.0,
+    "features": {
+     "total_fwd_bytes": 52428800.0,
+     "total_bwd_bytes": 20480.0
+    }
+   },
+   "detection": {
+    "event_id": "syn-ms-e08",
+    "timestamp": "2026-01-15T09:30:00Z",
+    "origin": "SYNTHETIC_FIXTURE",
+    "classical_model": "synthetic-fixture-classical",
+    "classical_model_version": "synthetic-multistage@1",
+    "p_malicious": 0.88,
+    "threshold": 0.5,
+    "verdict": "MALICIOUS",
+    "quantum": {
+     "gate_triggered": true,
+     "verdict": "MALICIOUS",
+     "p_malicious": 0.83,
+     "confidence": 0.83,
+     "backend": "synthetic-fixture (no quantum model was run)",
+     "feature_map": "synthetic-fixture",
+     "latency_ms": null
+    },
+    "quantum_disagreement": false,
+    "evidence_status": "CONSISTENT"
+   },
+   "techniques": [
+    {
+     "technique_id": "T1041",
+     "tactic_id": "TA0010",
+     "event_id": "syn-ms-e08",
+     "timestamp": "2026-01-15T09:30:00Z",
+     "confidence": 0.7,
+     "source": "SYNTHETIC_SCENARIO",
+     "evidence": [
+      "synthetic: large outbound transfer over the existing encrypted channel"
+     ],
+     "reference": "synthetic-multistage@1",
+     "detection_model": null,
+     "model_version": null
+    }
+   ],
+   "hints": {
+    "incident_id": null,
+    "session_id": null
+   }
+  }
+ ],
+ "resources": [
+  {
+   "resource_id": "web-01.example.test",
+   "resource_type": "web_server",
+   "criticality": "MEDIUM",
+   "owner": "synthetic-web-team",
+   "environment": "synthetic-lab"
+  },
+  {
+   "resource_id": "db-01.example.test",
+   "resource_type": "database_server",
+   "criticality": "HIGH",
+   "owner": "synthetic-data-team",
+   "environment": "synthetic-lab"
+  }
+ ],
+ "as_of": "2026-01-15T09:35:00+00:00"
+}

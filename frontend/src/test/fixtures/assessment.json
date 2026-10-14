@@ -1,0 +1,1495 @@
+{
+ "assessment_id": "asm-755b2bdbca554f84",
+ "created_at": "2026-10-07T20:39:57.055792Z",
+ "data_origin": "SYNTHETIC",
+ "output": {
+  "as_of": "2026-01-15T09:35:00Z",
+  "incidents": [
+   {
+    "chain": {
+     "chain_id": "chain-syn-ms-e01",
+     "status": "CORRELATED",
+     "chain": {
+      "chain_id": "chain-syn-ms-e01",
+      "entity_ids": [
+       "db-01.example.test",
+       "web-01.example.test"
+      ],
+      "steps": [
+       {
+        "technique_id": "T1190",
+        "tactic_id": "TA0001",
+        "timestamp": "2026-01-15T09:00:00Z",
+        "event_id": "syn-ms-e01",
+        "confidence": 0.9,
+        "source": "SYNTHETIC_SCENARIO:synthetic-multistage@1",
+        "provenance": "OBSERVED",
+        "alternative_candidates": [],
+        "evidence": [
+         "synthetic: crafted upload request to a public endpoint followed by a server error"
+        ]
+       },
+       {
+        "technique_id": "T1059.004",
+        "tactic_id": "TA0002",
+        "timestamp": "2026-01-15T09:02:30Z",
+        "event_id": "syn-ms-e03",
+        "confidence": 0.85,
+        "source": "SYNTHETIC_SCENARIO:synthetic-multistage@1",
+        "provenance": "OBSERVED",
+        "alternative_candidates": [],
+        "evidence": [
+         "synthetic: interactive shell spawned by the web application server process"
+        ]
+       },
+       {
+        "technique_id": "T1098.004",
+        "tactic_id": "TA0003",
+        "timestamp": "2026-01-15T09:06:00Z",
+        "event_id": "syn-ms-e04",
+        "confidence": 0.6,
+        "source": "SYNTHETIC_SCENARIO:synthetic-multistage@1",
+        "provenance": "OBSERVED",
+        "alternative_candidates": [],
+        "evidence": [
+         "synthetic: authorized_keys of a service account modified by the web server user (low-confidence annotation)"
+        ]
+       },
+       {
+        "technique_id": "T1003.008",
+        "tactic_id": "TA0006",
+        "timestamp": "2026-01-15T09:09:00Z",
+        "event_id": "syn-ms-e05",
+        "confidence": 0.8,
+        "source": "SYNTHETIC_SCENARIO:synthetic-multistage@1",
+        "provenance": "OBSERVED",
+        "alternative_candidates": [],
+        "evidence": [
+         "synthetic: /etc/shadow read by the web server user"
+        ]
+       },
+       {
+        "technique_id": "T1021.004",
+        "tactic_id": "TA0008",
+        "timestamp": "2026-01-15T09:14:00Z",
+        "event_id": "syn-ms-e06",
+        "confidence": 0.75,
+        "source": "SYNTHETIC_SCENARIO:synthetic-multistage@1",
+        "provenance": "OBSERVED",
+        "alternative_candidates": [],
+        "evidence": [
+         "synthetic: SSH login from the web server to the database server as the service account"
+        ]
+       },
+       {
+        "technique_id": "T1041",
+        "tactic_id": "TA0010",
+        "timestamp": "2026-01-15T09:30:00Z",
+        "event_id": "syn-ms-e08",
+        "confidence": 0.7,
+        "source": "SYNTHETIC_SCENARIO:synthetic-multistage@1",
+        "provenance": "OBSERVED",
+        "alternative_candidates": [],
+        "evidence": [
+         "synthetic: large outbound transfer over the existing encrypted channel"
+        ]
+       }
+      ],
+      "data_origin": "SYNTHETIC",
+      "attack_version": "19.2",
+      "created_at": "2026-01-15T09:35:00Z"
+     },
+     "documented_steps": [],
+     "decisions": [
+      {
+       "event_id": "syn-ms-e01",
+       "chain_id": "chain-syn-ms-e01",
+       "rule": "new_chain",
+       "matched_keys": []
+      },
+      {
+       "event_id": "syn-ms-e03",
+       "chain_id": "chain-syn-ms-e01",
+       "rule": "shared_resource",
+       "matched_keys": [
+        "web-01.example.test"
+       ]
+      },
+      {
+       "event_id": "syn-ms-e04",
+       "chain_id": "chain-syn-ms-e01",
+       "rule": "shared_resource",
+       "matched_keys": [
+        "web-01.example.test"
+       ]
+      },
+      {
+       "event_id": "syn-ms-e05",
+       "chain_id": "chain-syn-ms-e01",
+       "rule": "shared_resource",
+       "matched_keys": [
+        "web-01.example.test"
+       ]
+      },
+      {
+       "event_id": "syn-ms-e06",
+       "chain_id": "chain-syn-ms-e01",
+       "rule": "shared_resource",
+       "matched_keys": [
+        "web-01.example.test"
+       ]
+      },
+      {
+       "event_id": "syn-ms-e08",
+       "chain_id": "chain-syn-ms-e01",
+       "rule": "shared_resource",
+       "matched_keys": [
+        "db-01.example.test"
+       ]
+      }
+     ],
+     "resources": [
+      "db-01.example.test",
+      "web-01.example.test"
+     ],
+     "detections": [
+      {
+       "event_id": "syn-ms-e01",
+       "timestamp": "2026-01-15T09:00:00Z",
+       "origin": "SYNTHETIC_FIXTURE",
+       "classical_model": "synthetic-fixture-classical",
+       "classical_model_version": "synthetic-multistage@1",
+       "p_malicious": 0.91,
+       "threshold": 0.5,
+       "verdict": "MALICIOUS",
+       "quantum": {
+        "gate_triggered": true,
+        "verdict": "MALICIOUS",
+        "p_malicious": 0.8,
+        "confidence": 0.8,
+        "backend": "synthetic-fixture (no quantum model was run)",
+        "feature_map": "synthetic-fixture",
+        "latency_ms": null
+       },
+       "quantum_disagreement": false,
+       "evidence_status": "CONSISTENT"
+      },
+      {
+       "event_id": "syn-ms-e03",
+       "timestamp": "2026-01-15T09:02:30Z",
+       "origin": "SYNTHETIC_FIXTURE",
+       "classical_model": "synthetic-fixture-classical",
+       "classical_model_version": "synthetic-multistage@1",
+       "p_malicious": 0.62,
+       "threshold": 0.5,
+       "verdict": "MALICIOUS",
+       "quantum": {
+        "gate_triggered": true,
+        "verdict": "BENIGN",
+        "p_malicious": 0.35,
+        "confidence": 0.65,
+        "backend": "synthetic-fixture (no quantum model was run)",
+        "feature_map": "synthetic-fixture",
+        "latency_ms": null
+       },
+       "quantum_disagreement": true,
+       "evidence_status": "CORROBORATED BY INDEPENDENT EVIDENCE"
+      },
+      {
+       "event_id": "syn-ms-e04",
+       "timestamp": "2026-01-15T09:06:00Z",
+       "origin": "SYNTHETIC_FIXTURE",
+       "classical_model": "synthetic-fixture-classical",
+       "classical_model_version": "synthetic-multistage@1",
+       "p_malicious": 0.45,
+       "threshold": 0.5,
+       "verdict": "BENIGN",
+       "quantum": {
+        "gate_triggered": true,
+        "verdict": "MALICIOUS",
+        "p_malicious": 0.72,
+        "confidence": 0.72,
+        "backend": "synthetic-fixture (no quantum model was run)",
+        "feature_map": "synthetic-fixture",
+        "latency_ms": null
+       },
+       "quantum_disagreement": true,
+       "evidence_status": "NEEDS ADDITIONAL EVIDENCE"
+      },
+      {
+       "event_id": "syn-ms-e05",
+       "timestamp": "2026-01-15T09:09:00Z",
+       "origin": "SYNTHETIC_FIXTURE",
+       "classical_model": "synthetic-fixture-classical",
+       "classical_model_version": "synthetic-multistage@1",
+       "p_malicious": 0.77,
+       "threshold": 0.5,
+       "verdict": "MALICIOUS",
+       "quantum": {
+        "gate_triggered": true,
+        "verdict": "MALICIOUS",
+        "p_malicious": 0.74,
+        "confidence": 0.74,
+        "backend": "synthetic-fixture (no quantum model was run)",
+        "feature_map": "synthetic-fixture",
+        "latency_ms": null
+       },
+       "quantum_disagreement": false,
+       "evidence_status": "CONSISTENT"
+      },
+      {
+       "event_id": "syn-ms-e06",
+       "timestamp": "2026-01-15T09:14:00Z",
+       "origin": "SYNTHETIC_FIXTURE",
+       "classical_model": "synthetic-fixture-classical",
+       "classical_model_version": "synthetic-multistage@1",
+       "p_malicious": 0.55,
+       "threshold": 0.5,
+       "verdict": "MALICIOUS",
+       "quantum": null,
+       "quantum_disagreement": false,
+       "evidence_status": "NO SECOND OPINION"
+      },
+      {
+       "event_id": "syn-ms-e08",
+       "timestamp": "2026-01-15T09:30:00Z",
+       "origin": "SYNTHETIC_FIXTURE",
+       "classical_model": "synthetic-fixture-classical",
+       "classical_model_version": "synthetic-multistage@1",
+       "p_malicious": 0.88,
+       "threshold": 0.5,
+       "verdict": "MALICIOUS",
+       "quantum": {
+        "gate_triggered": true,
+        "verdict": "MALICIOUS",
+        "p_malicious": 0.83,
+        "confidence": 0.83,
+        "backend": "synthetic-fixture (no quantum model was run)",
+        "feature_map": "synthetic-fixture",
+        "latency_ms": null
+       },
+       "quantum_disagreement": false,
+       "evidence_status": "CONSISTENT"
+      }
+     ],
+     "out_of_vocabulary_technique_ids": [],
+     "data_origin": "SYNTHETIC"
+    },
+    "prediction": {
+     "chain_id": "chain-syn-ms-e01",
+     "result": {
+      "prediction_id": "pred-chain-syn-ms-e01",
+      "chain_id": "chain-syn-ms-e01",
+      "observed_prefix": [
+       "T1190",
+       "T1059.004",
+       "T1098.004",
+       "T1003.008",
+       "T1021.004",
+       "T1041"
+      ],
+      "next_step": [
+       {
+        "technique_id": "T1105",
+        "probability": 0.09038418633033328
+       },
+       {
+        "technique_id": "T1059.001",
+        "probability": 0.033350895078410714
+       },
+       {
+        "technique_id": "T1018",
+        "probability": 0.02442218228149123
+       },
+       {
+        "technique_id": "T1119",
+        "probability": 0.023108340177770376
+       },
+       {
+        "technique_id": "T1070.004",
+        "probability": 0.02162166242540773
+       }
+      ],
+      "paths": [
+       {
+        "technique_ids": [
+         "T1105",
+         "T1105",
+         "T1105"
+        ],
+        "probability": 0.001162745618503331,
+        "cumulative_log_score": -6.75697115808619,
+        "length": 3
+       },
+       {
+        "technique_ids": [
+         "T1105",
+         "T1059.001",
+         "T1105"
+        ],
+        "probability": 0.0005761369053002448,
+        "cumulative_log_score": -7.4591652426975426,
+        "length": 3
+       },
+       {
+        "technique_ids": [
+         "T1105",
+         "T1105",
+         "T1059.001"
+        ],
+        "probability": 0.0004946956051811015,
+        "cumulative_log_score": -7.611567923576215,
+        "length": 3
+       },
+       {
+        "technique_ids": [
+         "T1059.001",
+         "T1105",
+         "T1105"
+        ],
+        "probability": 0.0004659012648864306,
+        "cumulative_log_score": -7.671536824214042,
+        "length": 3
+       },
+       {
+        "technique_ids": [
+         "T1105",
+         "T1070.004",
+         "T1105"
+        ],
+        "probability": 0.000432300505055176,
+        "cumulative_log_score": -7.746389597993485,
+        "length": 3
+       },
+       {
+        "technique_ids": [
+         "T1105",
+         "T1105",
+         "T1070.004"
+        ],
+        "probability": 0.0004031678231749929,
+        "cumulative_log_score": -7.816157648025045,
+        "length": 3
+       },
+       {
+        "technique_ids": [
+         "T1018",
+         "T1105",
+         "T1105"
+        ],
+        "probability": 0.00037483139842026846,
+        "cumulative_log_score": -7.88903423730876,
+        "length": 3
+       },
+       {
+        "technique_ids": [
+         "T1105",
+         "T1070.004",
+         "T1685"
+        ],
+        "probability": 0.0002967120347627383,
+        "cumulative_log_score": -8.122748469431679,
+        "length": 3
+       },
+       {
+        "technique_ids": [
+         "T1070.004",
+         "T1105",
+         "T1105"
+        ],
+        "probability": 0.00028255784400532354,
+        "cumulative_log_score": -8.171627270796774,
+        "length": 3
+       },
+       {
+        "technique_ids": [
+         "T1119",
+         "T1105",
+         "T1105"
+        ],
+        "probability": 0.0002702026816938477,
+        "cumulative_log_score": -8.21633820763973,
+        "length": 3
+       }
+      ],
+      "horizon": 3,
+      "model_id": "HYBRID",
+      "vocabulary_version": "v1-attack-19.2-f42457f4db96",
+      "attack_version": "19.2",
+      "provenance": "PREDICTED",
+      "created_at": "2026-01-15T09:35:00Z"
+     },
+     "context_tokens": [
+      "T1190",
+      "T1059.004",
+      "T1098.004",
+      "T1003.008",
+      "T1021.004",
+      "T1041"
+     ],
+     "model_versions": {
+      "B1": "20261006T173740Z-markov-baselines-document/B1.json (trained 2026-10-06T17:39:26.505148+00:00)",
+      "M1": "20261006T173740Z-markov-baselines-document/M1.json (trained 2026-10-06T17:39:26.611164+00:00)",
+      "LSTM": "20261006T181005Z-lstm-hybrid-beam-document/lstm/fold-00 (held-out group 'Black Basta Ransomware'; trained 2026-10-06T18:10:52.070165+00:00)",
+      "HYBRID": "alpha=0.7 x LSTM + (1-alpha) x M1 (alpha = fold-00 inner-validation choice)",
+      "vocabulary": "v1-attack-19.2-f42457f4db96"
+     },
+     "beam_width": 10,
+     "next_step_semantics": "NEXT-STEP PROBABILITY: model P(next technique | observed history); not calibrated",
+     "path_score_semantics": "PATH SCORE: joint model probability of one exact continuation; summed beam scores are a LOWER BOUND, not a calibrated probability of reaching a tactic",
+     "per_model_top_k": {
+      "B1": [
+       [
+        "T1105",
+        0.0744262152633571
+       ],
+       [
+        "T1078",
+        0.024664408012989414
+       ],
+       [
+        "T1059.001",
+        0.024276405098480273
+       ],
+       [
+        "T1070.004",
+        0.019136470636570497
+       ],
+       [
+        "T1685",
+        0.018294959257814984
+       ]
+      ],
+      "M1": [
+       [
+        "T1105",
+        0.06608295265335887
+       ],
+       [
+        "T1119",
+        0.06114780152421016
+       ],
+       [
+        "T1018",
+        0.061057350382181616
+       ],
+       [
+        "T1078",
+        0.02189950007773626
+       ],
+       [
+        "T1059.001",
+        0.02155499272722617
+       ]
+      ],
+      "LSTM": [
+       [
+        "T1105",
+        0.1007990007633223
+       ],
+       [
+        "T1059.001",
+        0.038406281800346935
+       ],
+       [
+        "T1070.004",
+        0.023606124588619805
+       ],
+       [
+        "T1070",
+        0.022570458335614996
+       ],
+       [
+        "T1486",
+        0.0208134540760715
+       ]
+      ],
+      "HYBRID": [
+       [
+        "T1105",
+        0.09038418633033328
+       ],
+       [
+        "T1059.001",
+        0.033350895078410714
+       ],
+       [
+        "T1018",
+        0.02442218228149123
+       ],
+       [
+        "T1119",
+        0.023108340177770376
+       ],
+       [
+        "T1070.004",
+        0.02162166242540773
+       ]
+      ]
+     },
+     "provenance": "PREDICTED"
+    },
+    "high_impact_next_step_probability": 0.09744212265866806,
+    "risk": {
+     "assessment_id": "risk-chain-syn-ms-e01",
+     "entity_id": "db-01.example.test",
+     "chain_id": "chain-syn-ms-e01",
+     "score": 76.4492,
+     "level": "CRITICAL",
+     "components": [
+      {
+       "name": "detection",
+       "value": 0.91,
+       "weight": 25.0,
+       "contribution": 22.75,
+       "reason": "max classical P(malicious) 0.910 over 6 detection(s)"
+      },
+      {
+       "name": "technique_confidence",
+       "value": 0.7666666666666666,
+       "weight": 15.0,
+       "contribution": 11.5,
+       "reason": "mean confidence of 6 observed step(s)"
+      },
+      {
+       "name": "tactic_progression",
+       "value": 0.9333333333333333,
+       "weight": 25.0,
+       "contribution": 23.333333,
+       "reason": "furthest observed tactic: exfiltration (matrix position 13)"
+      },
+      {
+       "name": "predicted_high_impact",
+       "value": 0.09744212265866806,
+       "weight": 15.0,
+       "contribution": 1.461632,
+       "reason": "model P(next technique in ['TA0010', 'TA0040']) = 0.0974 (NEXT-STEP PROBABILITY, not calibrated)"
+      },
+      {
+       "name": "asset_criticality",
+       "value": 0.75,
+       "weight": 10.0,
+       "contribution": 7.5,
+       "reason": "max provided criticality value 0.75"
+      },
+      {
+       "name": "recency",
+       "value": 0.9904191474668262,
+       "weight": 10.0,
+       "contribution": 9.904191,
+       "reason": "0.08 h since the latest observed step (half-life 6.0 h)"
+      },
+      {
+       "name": "quantum_second_opinion",
+       "value": 0.3333333333333333,
+       "weight": 0.0,
+       "contribution": 0.0,
+       "reason": "informational only (0 points): 2 classical/quantum disagreement(s); 1 event(s) NEED ADDITIONAL EVIDENCE"
+      }
+     ],
+     "reasons": [
+      "detection: 22.75 pts (max classical P(malicious) 0.910 over 6 detection(s))",
+      "technique_confidence: 11.50 pts (mean confidence of 6 observed step(s))",
+      "tactic_progression: 23.33 pts (furthest observed tactic: exfiltration (matrix position 13))",
+      "predicted_high_impact: 1.46 pts (model P(next technique in ['TA0010', 'TA0040']) = 0.0974 (NEXT-STEP PROBABILITY, not calibrated))",
+      "asset_criticality: 7.50 pts (max provided criticality value 0.75)",
+      "recency: 9.90 pts (0.08 h since the latest observed step (half-life 6.0 h))",
+      "quantum_second_opinion: 0.00 pts (informational only (0 points): 2 classical/quantum disagreement(s); 1 event(s) NEED ADDITIONAL EVIDENCE)"
+     ],
+     "affected_assets": [
+      "db-01.example.test",
+      "web-01.example.test"
+     ],
+     "uncertainty": 0.16666666666666666,
+     "label": "MODEL-DERIVED RISK SCORE",
+     "created_at": "2026-01-15T09:35:00Z",
+     "observed_technique_ids": [
+      "T1190",
+      "T1059.004",
+      "T1098.004",
+      "T1003.008",
+      "T1021.004",
+      "T1041"
+     ],
+     "predicted_technique_ids": [
+      "T1105",
+      "T1059.001",
+      "T1018",
+      "T1119",
+      "T1070.004"
+     ],
+     "model_versions": {
+      "B1": "20261006T173740Z-markov-baselines-document/B1.json (trained 2026-10-06T17:39:26.505148+00:00)",
+      "M1": "20261006T173740Z-markov-baselines-document/M1.json (trained 2026-10-06T17:39:26.611164+00:00)",
+      "LSTM": "20261006T181005Z-lstm-hybrid-beam-document/lstm/fold-00 (held-out group 'Black Basta Ransomware'; trained 2026-10-06T18:10:52.070165+00:00)",
+      "HYBRID": "alpha=0.7 x LSTM + (1-alpha) x M1 (alpha = fold-00 inner-validation choice)",
+      "vocabulary": "v1-attack-19.2-f42457f4db96",
+      "detector:synthetic-fixture-classical": "synthetic-multistage@1",
+      "quantum:synthetic-fixture": "synthetic-fixture (no quantum model was run)"
+     },
+     "policy_version": "risk-policy-v1",
+     "quantum_disagreement": true,
+     "evidence_status": "NEEDS ADDITIONAL EVIDENCE"
+    },
+    "recommendations": [
+     {
+      "recommendation_id": "rec-chain-syn-ms-e01-escalate_severity-db-01.example.test",
+      "action": "escalate_severity",
+      "target": "db-01.example.test",
+      "reason": "escalate to a SOC analyst for review. MODEL-DERIVED RISK SCORE: 76.4 (CRITICAL); evidence status: NEEDS ADDITIONAL EVIDENCE.",
+      "triggering_evidence": [
+       {
+        "kind": "risk",
+        "ref_id": "risk-chain-syn-ms-e01",
+        "description": "MODEL-DERIVED RISK SCORE 76.4 (CRITICAL)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e01",
+        "description": "OBSERVED T1190 (TA0001)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e03",
+        "description": "OBSERVED T1059.004 (TA0002)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e04",
+        "description": "OBSERVED T1098.004 (TA0003)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e05",
+        "description": "OBSERVED T1003.008 (TA0006)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e06",
+        "description": "OBSERVED T1021.004 (TA0008)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e08",
+        "description": "OBSERVED T1041 (TA0010)"
+       },
+       {
+        "kind": "prediction",
+        "ref_id": "pred-chain-syn-ms-e01",
+        "description": "PREDICTED next T1105 (next-step probability 0.090)"
+       }
+      ],
+      "risk_score": 76.4492,
+      "risk_level": "CRITICAL",
+      "attack_mitigation_ids": [
+       "M1016",
+       "M1018",
+       "M1022",
+       "M1026",
+       "M1027",
+       "M1030",
+       "M1031",
+       "M1032",
+       "M1035",
+       "M1037",
+       "M1038",
+       "M1042",
+       "M1048",
+       "M1050",
+       "M1051",
+       "M1057"
+      ],
+      "addresses_technique_ids": [
+       "T1003.008",
+       "T1021.004",
+       "T1041",
+       "T1059.004",
+       "T1098.004",
+       "T1105",
+       "T1190"
+      ],
+      "confidence": 0.6388888888888888,
+      "priority": 68.8043,
+      "disruption": "NONE",
+      "reversible": true,
+      "requires_human_approval": true,
+      "status": "PROPOSED",
+      "created_at": "2026-01-15T09:35:00Z",
+      "chain_id": "chain-syn-ms-e01",
+      "policy_version": "defense-policy-v1",
+      "approval_note": "RECOMMENDATION ONLY - requires human approval; the system executes nothing."
+     },
+     {
+      "recommendation_id": "rec-chain-syn-ms-e01-restrict_communication-db-01.example.test",
+      "action": "restrict_communication",
+      "target": "db-01.example.test",
+      "reason": "HIGH risk: consider restricting suspicious communication of the affected resource (pending human approval). MODEL-DERIVED RISK SCORE: 76.4 (CRITICAL); evidence status: NEEDS ADDITIONAL EVIDENCE.",
+      "triggering_evidence": [
+       {
+        "kind": "risk",
+        "ref_id": "risk-chain-syn-ms-e01",
+        "description": "MODEL-DERIVED RISK SCORE 76.4 (CRITICAL)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e01",
+        "description": "OBSERVED T1190 (TA0001)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e03",
+        "description": "OBSERVED T1059.004 (TA0002)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e04",
+        "description": "OBSERVED T1098.004 (TA0003)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e05",
+        "description": "OBSERVED T1003.008 (TA0006)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e06",
+        "description": "OBSERVED T1021.004 (TA0008)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e08",
+        "description": "OBSERVED T1041 (TA0010)"
+       },
+       {
+        "kind": "prediction",
+        "ref_id": "pred-chain-syn-ms-e01",
+        "description": "PREDICTED next T1105 (next-step probability 0.090)"
+       }
+      ],
+      "risk_score": 76.4492,
+      "risk_level": "CRITICAL",
+      "attack_mitigation_ids": [
+       "M1016",
+       "M1018",
+       "M1022",
+       "M1026",
+       "M1027",
+       "M1030",
+       "M1031",
+       "M1032",
+       "M1035",
+       "M1037",
+       "M1038",
+       "M1042",
+       "M1048",
+       "M1050",
+       "M1051",
+       "M1057"
+      ],
+      "addresses_technique_ids": [
+       "T1003.008",
+       "T1021.004",
+       "T1041",
+       "T1059.004",
+       "T1098.004",
+       "T1105",
+       "T1190"
+      ],
+      "confidence": 0.6388888888888888,
+      "priority": 53.5144,
+      "disruption": "MEDIUM",
+      "reversible": true,
+      "requires_human_approval": true,
+      "status": "PROPOSED",
+      "created_at": "2026-01-15T09:35:00Z",
+      "chain_id": "chain-syn-ms-e01",
+      "policy_version": "defense-policy-v1",
+      "approval_note": "RECOMMENDATION ONLY - requires human approval; the system executes nothing."
+     },
+     {
+      "recommendation_id": "rec-chain-syn-ms-e01-collect_additional_evidence-web-01.example.test",
+      "action": "collect_additional_evidence",
+      "target": "web-01.example.test",
+      "reason": "classical and quantum opinions disagree without independent corroboration, or risk is MEDIUM: collect more evidence before acting. MODEL-DERIVED RISK SCORE: 76.4 (CRITICAL); evidence status: NEEDS ADDITIONAL EVIDENCE.",
+      "triggering_evidence": [
+       {
+        "kind": "risk",
+        "ref_id": "risk-chain-syn-ms-e01",
+        "description": "MODEL-DERIVED RISK SCORE 76.4 (CRITICAL)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e01",
+        "description": "OBSERVED T1190 (TA0001)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e03",
+        "description": "OBSERVED T1059.004 (TA0002)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e04",
+        "description": "OBSERVED T1098.004 (TA0003)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e05",
+        "description": "OBSERVED T1003.008 (TA0006)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e06",
+        "description": "OBSERVED T1021.004 (TA0008)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e08",
+        "description": "OBSERVED T1041 (TA0010)"
+       },
+       {
+        "kind": "prediction",
+        "ref_id": "pred-chain-syn-ms-e01",
+        "description": "PREDICTED next T1105 (next-step probability 0.090)"
+       },
+       {
+        "kind": "detection",
+        "ref_id": "syn-ms-e04",
+        "description": "NEEDS ADDITIONAL EVIDENCE (quantum disagreement)"
+       }
+      ],
+      "risk_score": 76.4492,
+      "risk_level": "CRITICAL",
+      "attack_mitigation_ids": [
+       "M1016",
+       "M1018",
+       "M1022",
+       "M1026",
+       "M1027",
+       "M1030",
+       "M1031",
+       "M1032",
+       "M1035",
+       "M1037",
+       "M1038",
+       "M1042",
+       "M1048",
+       "M1050",
+       "M1051",
+       "M1057"
+      ],
+      "addresses_technique_ids": [
+       "T1003.008",
+       "T1021.004",
+       "T1041",
+       "T1059.004",
+       "T1098.004",
+       "T1105",
+       "T1190"
+      ],
+      "confidence": 0.6388888888888888,
+      "priority": 38.2246,
+      "disruption": "NONE",
+      "reversible": true,
+      "requires_human_approval": true,
+      "status": "PROPOSED",
+      "created_at": "2026-01-15T09:35:00Z",
+      "chain_id": "chain-syn-ms-e01",
+      "policy_version": "defense-policy-v1",
+      "approval_note": "RECOMMENDATION ONLY - requires human approval; the system executes nothing."
+     },
+     {
+      "recommendation_id": "rec-chain-syn-ms-e01-increase_monitoring-db-01.example.test",
+      "action": "increase_monitoring",
+      "target": "db-01.example.test",
+      "reason": "continue / increase monitoring of the affected resource. MODEL-DERIVED RISK SCORE: 76.4 (CRITICAL); evidence status: NEEDS ADDITIONAL EVIDENCE.",
+      "triggering_evidence": [
+       {
+        "kind": "risk",
+        "ref_id": "risk-chain-syn-ms-e01",
+        "description": "MODEL-DERIVED RISK SCORE 76.4 (CRITICAL)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e01",
+        "description": "OBSERVED T1190 (TA0001)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e03",
+        "description": "OBSERVED T1059.004 (TA0002)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e04",
+        "description": "OBSERVED T1098.004 (TA0003)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e05",
+        "description": "OBSERVED T1003.008 (TA0006)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e06",
+        "description": "OBSERVED T1021.004 (TA0008)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e08",
+        "description": "OBSERVED T1041 (TA0010)"
+       },
+       {
+        "kind": "prediction",
+        "ref_id": "pred-chain-syn-ms-e01",
+        "description": "PREDICTED next T1105 (next-step probability 0.090)"
+       }
+      ],
+      "risk_score": 76.4492,
+      "risk_level": "CRITICAL",
+      "attack_mitigation_ids": [
+       "M1016",
+       "M1018",
+       "M1022",
+       "M1026",
+       "M1027",
+       "M1030",
+       "M1031",
+       "M1032",
+       "M1035",
+       "M1037",
+       "M1038",
+       "M1042",
+       "M1048",
+       "M1050",
+       "M1051",
+       "M1057"
+      ],
+      "addresses_technique_ids": [
+       "T1003.008",
+       "T1021.004",
+       "T1041",
+       "T1059.004",
+       "T1098.004",
+       "T1105",
+       "T1190"
+      ],
+      "confidence": 0.6388888888888888,
+      "priority": 22.9348,
+      "disruption": "NONE",
+      "reversible": true,
+      "requires_human_approval": true,
+      "status": "PROPOSED",
+      "created_at": "2026-01-15T09:35:00Z",
+      "chain_id": "chain-syn-ms-e01",
+      "policy_version": "defense-policy-v1",
+      "approval_note": "RECOMMENDATION ONLY - requires human approval; the system executes nothing."
+     }
+    ]
+   },
+   {
+    "chain": {
+     "chain_id": "chain-syn-ms-e07",
+     "status": "STANDALONE",
+     "chain": {
+      "chain_id": "chain-syn-ms-e07",
+      "entity_ids": [
+       "mail-01.example.test"
+      ],
+      "steps": [
+       {
+        "technique_id": "T1110.001",
+        "tactic_id": "TA0006",
+        "timestamp": "2026-01-15T09:20:00Z",
+        "event_id": "syn-ms-e07",
+        "confidence": 0.4,
+        "source": "SYNTHETIC_SCENARIO:synthetic-multistage@1",
+        "provenance": "OBSERVED",
+        "alternative_candidates": [],
+        "evidence": [
+         "synthetic: single failed mailbox login (weak, unrelated evidence)"
+        ]
+       }
+      ],
+      "data_origin": "SYNTHETIC",
+      "attack_version": "19.2",
+      "created_at": "2026-01-15T09:35:00Z"
+     },
+     "documented_steps": [],
+     "decisions": [
+      {
+       "event_id": "syn-ms-e07",
+       "chain_id": "chain-syn-ms-e07",
+       "rule": "new_chain",
+       "matched_keys": []
+      }
+     ],
+     "resources": [
+      "mail-01.example.test"
+     ],
+     "detections": [
+      {
+       "event_id": "syn-ms-e07",
+       "timestamp": "2026-01-15T09:20:00Z",
+       "origin": "SYNTHETIC_FIXTURE",
+       "classical_model": "synthetic-fixture-classical",
+       "classical_model_version": "synthetic-multistage@1",
+       "p_malicious": 0.3,
+       "threshold": 0.5,
+       "verdict": "BENIGN",
+       "quantum": null,
+       "quantum_disagreement": false,
+       "evidence_status": "NO SECOND OPINION"
+      }
+     ],
+     "out_of_vocabulary_technique_ids": [],
+     "data_origin": "SYNTHETIC"
+    },
+    "prediction": {
+     "chain_id": "chain-syn-ms-e07",
+     "result": {
+      "prediction_id": "pred-chain-syn-ms-e07",
+      "chain_id": "chain-syn-ms-e07",
+      "observed_prefix": [
+       "T1110.001"
+      ],
+      "next_step": [
+       {
+        "technique_id": "T1105",
+        "probability": 0.023805565057403933
+       },
+       {
+        "technique_id": "T1059.001",
+        "probability": 0.008774682125340732
+       },
+       {
+        "technique_id": "T1078",
+        "probability": 0.008629531397159532
+       },
+       {
+        "technique_id": "T1070.004",
+        "probability": 0.007223320001999853
+       },
+       {
+        "technique_id": "T1021.001",
+        "probability": 0.006819797296498926
+       }
+      ],
+      "paths": [
+       {
+        "technique_ids": [
+         "T1105",
+         "T1070.004",
+         "T1685"
+        ],
+        "probability": 4.381106365309676e-05,
+        "cumulative_log_score": -10.035624177659013,
+        "length": 3
+       },
+       {
+        "technique_ids": [
+         "T1105",
+         "T1059.006",
+         "T1518.001"
+        ],
+        "probability": 3.816686583013991e-05,
+        "cumulative_log_score": -10.173542805394764,
+        "length": 3
+       },
+       {
+        "technique_ids": [
+         "T1105",
+         "T1105",
+         "T1105"
+        ],
+        "probability": 3.2352961334155053e-05,
+        "cumulative_log_score": -10.338805000738466,
+        "length": 3
+       },
+       {
+        "technique_ids": [
+         "T1105",
+         "T1059.001",
+         "T1105"
+        ],
+        "probability": 2.6557917625626536e-05,
+        "cumulative_log_score": -10.536182639079293,
+        "length": 3
+       },
+       {
+        "technique_ids": [
+         "T1105",
+         "T1070.004",
+         "T1105"
+        ],
+        "probability": 2.2502524683807556e-05,
+        "cumulative_log_score": -10.70188304687954,
+        "length": 3
+       },
+       {
+        "technique_ids": [
+         "T1105",
+         "T1105",
+         "T1070.004"
+        ],
+        "probability": 2.075203477334076e-05,
+        "cumulative_log_score": -10.782866254729448,
+        "length": 3
+       },
+       {
+        "technique_ids": [
+         "T1070.004",
+         "T1685",
+         "T1486"
+        ],
+        "probability": 1.9030043288582848e-05,
+        "cumulative_log_score": -10.869491601904055,
+        "length": 3
+       },
+       {
+        "technique_ids": [
+         "T1105",
+         "T1083",
+         "T1105"
+        ],
+        "probability": 1.8842418583099738e-05,
+        "cumulative_log_score": -10.879399922156272,
+        "length": 3
+       },
+       {
+        "technique_ids": [
+         "T1105",
+         "T1059.006",
+         "T1211"
+        ],
+        "probability": 1.8730042466350334e-05,
+        "cumulative_log_score": -10.885381774220386,
+        "length": 3
+       },
+       {
+        "technique_ids": [
+         "T1105",
+         "T1105",
+         "T1059.001"
+        ],
+        "probability": 1.8683649712810344e-05,
+        "cumulative_log_score": -10.887861763476483,
+        "length": 3
+       }
+      ],
+      "horizon": 3,
+      "model_id": "HYBRID",
+      "vocabulary_version": "v1-attack-19.2-f42457f4db96",
+      "attack_version": "19.2",
+      "provenance": "PREDICTED",
+      "created_at": "2026-01-15T09:35:00Z"
+     },
+     "context_tokens": [
+      "T1110.001"
+     ],
+     "model_versions": {
+      "B1": "20261006T173740Z-markov-baselines-document/B1.json (trained 2026-10-06T17:39:26.505148+00:00)",
+      "M1": "20261006T173740Z-markov-baselines-document/M1.json (trained 2026-10-06T17:39:26.611164+00:00)",
+      "LSTM": "20261006T181005Z-lstm-hybrid-beam-document/lstm/fold-00 (held-out group 'Black Basta Ransomware'; trained 2026-10-06T18:10:52.070165+00:00)",
+      "HYBRID": "alpha=0.7 x LSTM + (1-alpha) x M1 (alpha = fold-00 inner-validation choice)",
+      "vocabulary": "v1-attack-19.2-f42457f4db96"
+     },
+     "beam_width": 10,
+     "next_step_semantics": "NEXT-STEP PROBABILITY: model P(next technique | observed history); not calibrated",
+     "path_score_semantics": "PATH SCORE: joint model probability of one exact continuation; summed beam scores are a LOWER BOUND, not a calibrated probability of reaching a tactic",
+     "per_model_top_k": {
+      "B1": [
+       [
+        "T1105",
+        0.0744262152633571
+       ],
+       [
+        "T1078",
+        0.024664408012989414
+       ],
+       [
+        "T1059.001",
+        0.024276405098480273
+       ],
+       [
+        "T1070.004",
+        0.019136470636570497
+       ],
+       [
+        "T1685",
+        0.018294959257814984
+       ]
+      ],
+      "M1": [
+       [
+        "T1105",
+        0.0744262152633571
+       ],
+       [
+        "T1078",
+        0.024664408012989414
+       ],
+       [
+        "T1059.001",
+        0.024276405098480273
+       ],
+       [
+        "T1070.004",
+        0.019136470636570497
+       ],
+       [
+        "T1685",
+        0.018294959257814984
+       ]
+      ],
+      "LSTM": [
+       [
+        "T1070",
+        0.0022833003919152197
+       ],
+       [
+        "T1083",
+        0.0021558385757506743
+       ],
+       [
+        "T1059.001",
+        0.0021310865654237815
+       ],
+       [
+        "T1110",
+        0.0021305884407856342
+       ],
+       [
+        "T1070.004",
+        0.0021176840157552885
+       ]
+      ],
+      "HYBRID": [
+       [
+        "T1105",
+        0.023805565057403933
+       ],
+       [
+        "T1059.001",
+        0.008774682125340732
+       ],
+       [
+        "T1078",
+        0.008629531397159532
+       ],
+       [
+        "T1070.004",
+        0.007223320001999853
+       ],
+       [
+        "T1021.001",
+        0.006819797296498926
+       ]
+      ]
+     },
+     "provenance": "PREDICTED"
+    },
+    "high_impact_next_step_probability": 0.07756361091519355,
+    "risk": {
+     "assessment_id": "risk-chain-syn-ms-e07",
+     "entity_id": "mail-01.example.test",
+     "chain_id": "chain-syn-ms-e07",
+     "score": 44.3788,
+     "level": "MEDIUM",
+     "components": [
+      {
+       "name": "detection",
+       "value": 0.3,
+       "weight": 25.0,
+       "contribution": 7.5,
+       "reason": "max classical P(malicious) 0.300 over 1 detection(s)"
+      },
+      {
+       "name": "technique_confidence",
+       "value": 0.4,
+       "weight": 15.0,
+       "contribution": 6.0,
+       "reason": "mean confidence of 1 observed step(s)"
+      },
+      {
+       "name": "tactic_progression",
+       "value": 0.6,
+       "weight": 25.0,
+       "contribution": 15.0,
+       "reason": "furthest observed tactic: credential-access (matrix position 8)"
+      },
+      {
+       "name": "predicted_high_impact",
+       "value": 0.07756361091519355,
+       "weight": 15.0,
+       "contribution": 1.163454,
+       "reason": "model P(next technique in ['TA0010', 'TA0040']) = 0.0776 (NEXT-STEP PROBABILITY, not calibrated)"
+      },
+      {
+       "name": "asset_criticality",
+       "value": 0.5,
+       "weight": 10.0,
+       "contribution": 5.0,
+       "reason": "criticality not provided; neutral default 0.5"
+      },
+      {
+       "name": "recency",
+       "value": 0.9715319411536059,
+       "weight": 10.0,
+       "contribution": 9.715319,
+       "reason": "0.25 h since the latest observed step (half-life 6.0 h)"
+      },
+      {
+       "name": "quantum_second_opinion",
+       "value": 0.0,
+       "weight": 0.0,
+       "contribution": 0.0,
+       "reason": "informational only (0 points): 0 classical/quantum disagreement(s); 0 event(s) NEED ADDITIONAL EVIDENCE"
+      }
+     ],
+     "reasons": [
+      "detection: 7.50 pts (max classical P(malicious) 0.300 over 1 detection(s))",
+      "technique_confidence: 6.00 pts (mean confidence of 1 observed step(s))",
+      "tactic_progression: 15.00 pts (furthest observed tactic: credential-access (matrix position 8))",
+      "predicted_high_impact: 1.16 pts (model P(next technique in ['TA0010', 'TA0040']) = 0.0776 (NEXT-STEP PROBABILITY, not calibrated))",
+      "asset_criticality: 5.00 pts (criticality not provided; neutral default 0.5)",
+      "recency: 9.72 pts (0.25 h since the latest observed step (half-life 6.0 h))",
+      "quantum_second_opinion: 0.00 pts (informational only (0 points): 0 classical/quantum disagreement(s); 0 event(s) NEED ADDITIONAL EVIDENCE)"
+     ],
+     "affected_assets": [
+      "mail-01.example.test"
+     ],
+     "uncertainty": 0.0,
+     "label": "MODEL-DERIVED RISK SCORE",
+     "created_at": "2026-01-15T09:35:00Z",
+     "observed_technique_ids": [
+      "T1110.001"
+     ],
+     "predicted_technique_ids": [
+      "T1105",
+      "T1059.001",
+      "T1078",
+      "T1070.004",
+      "T1021.001"
+     ],
+     "model_versions": {
+      "B1": "20261006T173740Z-markov-baselines-document/B1.json (trained 2026-10-06T17:39:26.505148+00:00)",
+      "M1": "20261006T173740Z-markov-baselines-document/M1.json (trained 2026-10-06T17:39:26.611164+00:00)",
+      "LSTM": "20261006T181005Z-lstm-hybrid-beam-document/lstm/fold-00 (held-out group 'Black Basta Ransomware'; trained 2026-10-06T18:10:52.070165+00:00)",
+      "HYBRID": "alpha=0.7 x LSTM + (1-alpha) x M1 (alpha = fold-00 inner-validation choice)",
+      "vocabulary": "v1-attack-19.2-f42457f4db96",
+      "detector:synthetic-fixture-classical": "synthetic-multistage@1"
+     },
+     "policy_version": "risk-policy-v1",
+     "quantum_disagreement": false,
+     "evidence_status": "NO SECOND OPINION"
+    },
+    "recommendations": [
+     {
+      "recommendation_id": "rec-chain-syn-ms-e07-collect_additional_evidence-mail-01.example.test",
+      "action": "collect_additional_evidence",
+      "target": "mail-01.example.test",
+      "reason": "MEDIUM risk: collect more evidence before acting. MODEL-DERIVED RISK SCORE: 44.4 (MEDIUM); evidence status: NO SECOND OPINION.",
+      "triggering_evidence": [
+       {
+        "kind": "risk",
+        "ref_id": "risk-chain-syn-ms-e07",
+        "description": "MODEL-DERIVED RISK SCORE 44.4 (MEDIUM)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e07",
+        "description": "OBSERVED T1110.001 (TA0006)"
+       },
+       {
+        "kind": "prediction",
+        "ref_id": "pred-chain-syn-ms-e07",
+        "description": "PREDICTED next T1105 (next-step probability 0.024)"
+       }
+      ],
+      "risk_score": 44.3788,
+      "risk_level": "MEDIUM",
+      "attack_mitigation_ids": [
+       "M1027",
+       "M1031",
+       "M1032",
+       "M1036",
+       "M1037",
+       "M1051"
+      ],
+      "addresses_technique_ids": [
+       "T1105",
+       "T1110.001"
+      ],
+      "confidence": 0.4,
+      "priority": 22.1894,
+      "disruption": "NONE",
+      "reversible": true,
+      "requires_human_approval": true,
+      "status": "PROPOSED",
+      "created_at": "2026-01-15T09:35:00Z",
+      "chain_id": "chain-syn-ms-e07",
+      "policy_version": "defense-policy-v1",
+      "approval_note": "RECOMMENDATION ONLY - requires human approval; the system executes nothing."
+     },
+     {
+      "recommendation_id": "rec-chain-syn-ms-e07-increase_monitoring-mail-01.example.test",
+      "action": "increase_monitoring",
+      "target": "mail-01.example.test",
+      "reason": "continue / increase monitoring of the affected resource. MODEL-DERIVED RISK SCORE: 44.4 (MEDIUM); evidence status: NO SECOND OPINION.",
+      "triggering_evidence": [
+       {
+        "kind": "risk",
+        "ref_id": "risk-chain-syn-ms-e07",
+        "description": "MODEL-DERIVED RISK SCORE 44.4 (MEDIUM)"
+       },
+       {
+        "kind": "chain_step",
+        "ref_id": "syn-ms-e07",
+        "description": "OBSERVED T1110.001 (TA0006)"
+       },
+       {
+        "kind": "prediction",
+        "ref_id": "pred-chain-syn-ms-e07",
+        "description": "PREDICTED next T1105 (next-step probability 0.024)"
+       }
+      ],
+      "risk_score": 44.3788,
+      "risk_level": "MEDIUM",
+      "attack_mitigation_ids": [
+       "M1027",
+       "M1031",
+       "M1032",
+       "M1036",
+       "M1037",
+       "M1051"
+      ],
+      "addresses_technique_ids": [
+       "T1105",
+       "T1110.001"
+      ],
+      "confidence": 0.4,
+      "priority": 13.3136,
+      "disruption": "NONE",
+      "reversible": true,
+      "requires_human_approval": true,
+      "status": "PROPOSED",
+      "created_at": "2026-01-15T09:35:00Z",
+      "chain_id": "chain-syn-ms-e07",
+      "policy_version": "defense-policy-v1",
+      "approval_note": "RECOMMENDATION ONLY - requires human approval; the system executes nothing."
+     }
+    ]
+   }
+  ],
+  "unmapped_event_ids": [
+   "syn-ms-e02"
+  ],
+  "policy_versions": {
+   "correlation": "correlation-v1",
+   "risk": "risk-policy-v1",
+   "defense": "defense-policy-v1"
+  }
+ },
+ "notice": "RECOMMENDATION ONLY: the system executes nothing. Decisions are recorded for audit; any action is taken by humans outside this system."
+}

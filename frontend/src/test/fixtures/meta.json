@@ -1,0 +1,21 @@
+{
+ "api_version": "v1",
+ "defense_mode": "recommendation-only",
+ "attack_version": "19.2",
+ "vocabulary_version": "v1-attack-19.2-f42457f4db96",
+ "model_versions": {
+  "B1": "20261006T173740Z-markov-baselines-document/B1.json (trained 2026-10-06T17:39:26.505148+00:00)",
+  "M1": "20261006T173740Z-markov-baselines-document/M1.json (trained 2026-10-06T17:39:26.611164+00:00)",
+  "LSTM": "20261006T181005Z-lstm-hybrid-beam-document/lstm/fold-00 (held-out group 'Black Basta Ransomware'; trained 2026-10-06T18:10:52.070165+00:00)",
+  "HYBRID": "alpha=0.7 x LSTM + (1-alpha) x M1 (alpha = fold-00 inner-validation choice)",
+  "vocabulary": "v1-attack-19.2-f42457f4db96"
+ },
+ "policy_versions": {
+  "correlation": "correlation-v1",
+  "risk": "risk-policy-v1",
+  "defense": "defense-policy-v1"
+ },
+ "claim_policy": "No quantum advantage is claimed; quantum kernels are simulated on a CPU.",
+ "risk_label": "MODEL-DERIVED RISK SCORE",
+ "cic_label_policy": "CIC-IDS2017 attack labels are not MITRE ATT&CK techniques; no such mapping is applied."
+}

@@ -1,0 +1,18 @@
+[
+ {
+  "assessment_id": "asm-8eac14ff5c124cc8",
+  "created_at": "2026-10-07T20:39:57.067211Z",
+  "data_origin": "SYNTHETIC",
+  "incidents": 2,
+  "max_risk_score": 76.4492,
+  "recommendations": 8
+ },
+ {
+  "assessment_id": "asm-755b2bdbca554f84",
+  "created_at": "2026-10-07T20:39:57.055792Z",
+  "data_origin": "SYNTHETIC",
+  "incidents": 2,
+  "max_risk_score": 76.4492,
+  "recommendations": 6
+ }
+]

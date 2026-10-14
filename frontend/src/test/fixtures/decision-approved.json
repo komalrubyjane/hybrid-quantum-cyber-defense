@@ -1,0 +1,11 @@
+{
+ "decision_id": 2,
+ "assessment_id": "asm-8eac14ff5c124cc8",
+ "recommendation_id": "rec-chain-syn-ms-e01-isolate_affected_host-db-01.example.test",
+ "decision": "APPROVED",
+ "analyst": "analyst-1",
+ "note": null,
+ "recorded_at": "2026-10-07T20:39:57.074224Z",
+ "executed": false,
+ "notice": "RECOMMENDATION ONLY: the system executes nothing. Decisions are recorded for audit; any action is taken by humans outside this system."
+}

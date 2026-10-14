@@ -1,0 +1,3996 @@
+{
+ "openapi": "3.1.0",
+ "info": {
+  "title": "Hybrid Quantum-AI Cyber Defense API (research prototype)",
+  "description": "Defensive, RECOMMENDATION-ONLY research API. Recommendations are read-only and always require human approval; analyst decisions are recorded, never executed. Risk scores are MODEL-DERIVED. No quantum advantage is claimed.",
+  "version": "0.1.0"
+ },
+ "paths": {
+  "/health": {
+   "get": {
+    "tags": [
+     "health"
+    ],
+    "summary": "Health",
+    "description": "Liveness check. Reports configuration labels only (no paths or secrets).",
+    "operationId": "health_health_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HealthResponse"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/v1/meta": {
+   "get": {
+    "tags": [
+     "v1"
+    ],
+    "summary": "Meta",
+    "description": "Versions of the knowledge base, models and policies; the API's safety contract.",
+    "operationId": "meta_api_v1_meta_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MetaResponse"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "Conflict",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Unprocessable Entity",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/v1/scenarios/synthetic": {
+   "get": {
+    "tags": [
+     "v1"
+    ],
+    "summary": "Synthetic Scenario",
+    "description": "The SYNTHETIC integration scenario (hand-authored; never real-world data).",
+    "operationId": "synthetic_scenario_api_v1_scenarios_synthetic_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SyntheticScenario"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "Conflict",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Unprocessable Entity",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/v1/chains/reconstruct": {
+   "post": {
+    "tags": [
+     "v1"
+    ],
+    "summary": "Reconstruct",
+    "description": "Correlate observations (arrival order, never sorted) into incident chains.",
+    "operationId": "reconstruct_api_v1_chains_reconstruct_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ReconstructRequest"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ChainReconstruction"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "Conflict",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Unprocessable Entity",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/v1/predictions": {
+   "post": {
+    "tags": [
+     "v1"
+    ],
+    "summary": "Predict",
+    "description": "Next-technique probabilities and beam path scores (PREDICTED, never observed).",
+    "operationId": "predict_api_v1_predictions_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PredictRequest"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PredictResponse"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "Conflict",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Unprocessable Entity",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/v1/risk/assess": {
+   "post": {
+    "tags": [
+     "v1"
+    ],
+    "summary": "Assess Risk",
+    "description": "MODEL-DERIVED RISK SCORE for one chain (quantum evidence contributes 0 points).",
+    "operationId": "assess_risk_api_v1_risk_assess_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RiskRequest"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RiskAssessment"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "Conflict",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Unprocessable Entity",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/v1/assessments": {
+   "post": {
+    "tags": [
+     "v1"
+    ],
+    "summary": "Create Assessment",
+    "description": "Run the full pipeline on the submitted observations and store the (immutable) result.",
+    "operationId": "create_assessment_api_v1_assessments_post",
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/AssessmentRequest"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AssessmentRecord"
+        }
+       }
+      }
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Conflict"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Unprocessable Entity"
+     },
+     "503": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Service Unavailable"
+     }
+    }
+   },
+   "get": {
+    "tags": [
+     "v1"
+    ],
+    "summary": "List Assessments",
+    "operationId": "list_assessments_api_v1_assessments_get",
+    "parameters": [
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 200,
+       "minimum": 1,
+       "default": 50,
+       "title": "Limit"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "default": 0,
+       "title": "Offset"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/AssessmentSummary"
+         },
+         "title": "Response List Assessments Api V1 Assessments Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/v1/assessments/{assessment_id}": {
+   "get": {
+    "tags": [
+     "v1"
+    ],
+    "summary": "Get Assessment",
+    "operationId": "get_assessment_api_v1_assessments__assessment_id__get",
+    "parameters": [
+     {
+      "name": "assessment_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Assessment Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AssessmentRecord"
+        }
+       }
+      }
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Conflict"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Unprocessable Entity"
+     },
+     "503": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Service Unavailable"
+     }
+    }
+   }
+  },
+  "/api/v1/assessments/{assessment_id}/recommendations": {
+   "get": {
+    "tags": [
+     "v1"
+    ],
+    "summary": "List Recommendations",
+    "description": "Recommendations of an assessment (each requires human approval; none is executed).",
+    "operationId": "list_recommendations_api_v1_assessments__assessment_id__recommendations_get",
+    "parameters": [
+     {
+      "name": "assessment_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Assessment Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/RecommendationView"
+         },
+         "title": "Response List Recommendations Api V1 Assessments  Assessment Id  Recommendations Get"
+        }
+       }
+      }
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Conflict"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Unprocessable Entity"
+     },
+     "503": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Service Unavailable"
+     }
+    }
+   }
+  },
+  "/api/v1/assessments/{assessment_id}/recommendations/{recommendation_id}": {
+   "get": {
+    "tags": [
+     "v1"
+    ],
+    "summary": "Get Recommendation",
+    "operationId": "get_recommendation_api_v1_assessments__assessment_id__recommendations__recommendation_id__get",
+    "parameters": [
+     {
+      "name": "assessment_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Assessment Id"
+      }
+     },
+     {
+      "name": "recommendation_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Recommendation Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RecommendationView"
+        }
+       }
+      }
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Conflict"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Unprocessable Entity"
+     },
+     "503": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Service Unavailable"
+     }
+    }
+   }
+  },
+  "/api/v1/assessments/{assessment_id}/recommendations/{recommendation_id}/decisions": {
+   "get": {
+    "tags": [
+     "v1"
+    ],
+    "summary": "List Decisions",
+    "operationId": "list_decisions_api_v1_assessments__assessment_id__recommendations__recommendation_id__decisions_get",
+    "parameters": [
+     {
+      "name": "assessment_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Assessment Id"
+      }
+     },
+     {
+      "name": "recommendation_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Recommendation Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/DecisionRecord"
+         },
+         "title": "Response List Decisions Api V1 Assessments  Assessment Id  Recommendations  Recommendation Id  Decisions Get"
+        }
+       }
+      }
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Conflict"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Unprocessable Entity"
+     },
+     "503": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Service Unavailable"
+     }
+    }
+   },
+   "post": {
+    "tags": [
+     "v1"
+    ],
+    "summary": "Record Decision",
+    "description": "Append an analyst decision to the audit log. RECORDED ONLY - nothing is executed.\n\nApproving a HIGH-disruption recommendation requires an earlier ACKNOWLEDGED decision\n(two-step acknowledgement).",
+    "operationId": "record_decision_api_v1_assessments__assessment_id__recommendations__recommendation_id__decisions_post",
+    "parameters": [
+     {
+      "name": "assessment_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Assessment Id"
+      }
+     },
+     {
+      "name": "recommendation_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Recommendation Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/DecisionRequest"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/DecisionRecord"
+        }
+       }
+      }
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Conflict"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Unprocessable Entity"
+     },
+     "503": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Service Unavailable"
+     }
+    }
+   }
+  },
+  "/api/v1/runs": {
+   "get": {
+    "tags": [
+     "v1"
+    ],
+    "summary": "List Runs",
+    "description": "Stored experiment records (summaries only: no paths, environment or configuration).",
+    "operationId": "list_runs_api_v1_runs_get",
+    "parameters": [
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 200,
+       "minimum": 1,
+       "default": 50,
+       "title": "Limit"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "default": 0,
+       "title": "Offset"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/RunSummary"
+         },
+         "title": "Response List Runs Api V1 Runs Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/v1/runs/{run_id}": {
+   "get": {
+    "tags": [
+     "v1"
+    ],
+    "summary": "Get Run",
+    "operationId": "get_run_api_v1_runs__run_id__get",
+    "parameters": [
+     {
+      "name": "run_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Run Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RunSummary"
+        }
+       }
+      }
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Conflict"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Unprocessable Entity"
+     },
+     "503": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        }
+       }
+      },
+      "description": "Service Unavailable"
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "APIEvent": {
+    "properties": {
+     "event_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Event Id"
+     },
+     "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Timestamp"
+     },
+     "source_dataset": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Source Dataset",
+      "description": "Dataset or feed identifier, e.g. 'cicids2017' or 'synthetic-basic'."
+     },
+     "data_origin": {
+      "$ref": "#/components/schemas/DataOrigin"
+     },
+     "entity_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Entity Id",
+      "description": "Primary entity (host, IP or account) concerned."
+     },
+     "ground_truth_label": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Ground Truth Label",
+      "description": "Dataset label. For evaluation only; never used as a model input."
+     },
+     "event_type": {
+      "type": "string",
+      "const": "api",
+      "title": "Event Type",
+      "default": "api"
+     },
+     "client_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Client Id"
+     },
+     "endpoint": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Endpoint"
+     },
+     "method": {
+      "type": "string",
+      "enum": [
+       "GET",
+       "POST",
+       "PUT",
+       "PATCH",
+       "DELETE",
+       "HEAD",
+       "OPTIONS"
+      ],
+      "title": "Method"
+     },
+     "status_code": {
+      "type": "integer",
+      "maximum": 599.0,
+      "minimum": 100.0,
+      "title": "Status Code"
+     },
+     "src_ip": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "ipv4"
+       },
+       {
+        "type": "string",
+        "format": "ipv6"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Src Ip"
+     },
+     "bytes_out": {
+      "anyOf": [
+       {
+        "type": "integer",
+        "minimum": 0.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Bytes Out"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "event_id",
+     "timestamp",
+     "source_dataset",
+     "data_origin",
+     "entity_id",
+     "client_id",
+     "endpoint",
+     "method",
+     "status_code"
+    ],
+    "title": "APIEvent",
+    "description": "An application / API gateway request event."
+   },
+   "AssessmentRecord": {
+    "properties": {
+     "assessment_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Assessment Id"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     },
+     "data_origin": {
+      "$ref": "#/components/schemas/DataOrigin"
+     },
+     "output": {
+      "$ref": "#/components/schemas/PipelineOutput"
+     },
+     "notice": {
+      "type": "string",
+      "title": "Notice",
+      "default": "RECOMMENDATION ONLY: the system executes nothing. Decisions are recorded for audit; any action is taken by humans outside this system."
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "assessment_id",
+     "created_at",
+     "data_origin",
+     "output"
+    ],
+    "title": "AssessmentRecord"
+   },
+   "AssessmentRequest": {
+    "properties": {
+     "observations": {
+      "items": {
+       "$ref": "#/components/schemas/Observation"
+      },
+      "type": "array",
+      "maxItems": 1000,
+      "minItems": 1,
+      "title": "Observations"
+     },
+     "resources": {
+      "items": {
+       "$ref": "#/components/schemas/ResourceContext"
+      },
+      "type": "array",
+      "maxItems": 1000,
+      "title": "Resources"
+     },
+     "as_of": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "As Of"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "observations"
+    ],
+    "title": "AssessmentRequest"
+   },
+   "AssessmentSummary": {
+    "properties": {
+     "assessment_id": {
+      "type": "string",
+      "title": "Assessment Id"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     },
+     "data_origin": {
+      "$ref": "#/components/schemas/DataOrigin"
+     },
+     "incidents": {
+      "type": "integer",
+      "title": "Incidents"
+     },
+     "max_risk_score": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Max Risk Score"
+     },
+     "recommendations": {
+      "type": "integer",
+      "title": "Recommendations"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "assessment_id",
+     "created_at",
+     "data_origin",
+     "incidents",
+     "max_risk_score",
+     "recommendations"
+    ],
+    "title": "AssessmentSummary"
+   },
+   "AttackChain": {
+    "properties": {
+     "chain_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Chain Id"
+     },
+     "entity_ids": {
+      "items": {
+       "type": "string",
+       "minLength": 1
+      },
+      "type": "array",
+      "title": "Entity Ids"
+     },
+     "steps": {
+      "items": {
+       "$ref": "#/components/schemas/AttackStep"
+      },
+      "type": "array",
+      "minItems": 1,
+      "title": "Steps"
+     },
+     "data_origin": {
+      "$ref": "#/components/schemas/DataOrigin"
+     },
+     "attack_version": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Attack Version"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "chain_id",
+     "steps",
+     "data_origin",
+     "attack_version"
+    ],
+    "title": "AttackChain",
+    "description": "An ordered sequence of attack steps.\n\nOrder is significant and is never re-sorted: if timestamps are present they must\nalready be non-decreasing, otherwise validation fails."
+   },
+   "AttackStep": {
+    "properties": {
+     "technique_id": {
+      "type": "string",
+      "pattern": "^T\\d{4}(\\.\\d{3})?$",
+      "title": "Technique Id"
+     },
+     "tactic_id": {
+      "anyOf": [
+       {
+        "type": "string",
+        "pattern": "^TA\\d{4}$"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Tactic Id"
+     },
+     "timestamp": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Timestamp",
+      "description": "Event time. May be absent for knowledge-base sequences."
+     },
+     "event_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Event Id"
+     },
+     "confidence": {
+      "type": "number",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Confidence"
+     },
+     "source": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Source",
+      "description": "Origin of the step, e.g. a mapping table or flow."
+     },
+     "provenance": {
+      "$ref": "#/components/schemas/StepProvenance"
+     },
+     "alternative_candidates": {
+      "items": {
+       "$ref": "#/components/schemas/TechniqueCandidate"
+      },
+      "type": "array",
+      "title": "Alternative Candidates"
+     },
+     "evidence": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Evidence"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "technique_id",
+     "confidence",
+     "source",
+     "provenance"
+    ],
+    "title": "AttackStep",
+    "description": "One step of an attack chain."
+   },
+   "AuthOutcome": {
+    "type": "string",
+    "enum": [
+     "SUCCESS",
+     "FAILURE"
+    ],
+    "title": "AuthOutcome"
+   },
+   "AuthenticationEvent": {
+    "properties": {
+     "event_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Event Id"
+     },
+     "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Timestamp"
+     },
+     "source_dataset": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Source Dataset",
+      "description": "Dataset or feed identifier, e.g. 'cicids2017' or 'synthetic-basic'."
+     },
+     "data_origin": {
+      "$ref": "#/components/schemas/DataOrigin"
+     },
+     "entity_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Entity Id",
+      "description": "Primary entity (host, IP or account) concerned."
+     },
+     "ground_truth_label": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Ground Truth Label",
+      "description": "Dataset label. For evaluation only; never used as a model input."
+     },
+     "event_type": {
+      "type": "string",
+      "const": "authentication",
+      "title": "Event Type",
+      "default": "authentication"
+     },
+     "user": {
+      "type": "string",
+      "minLength": 1,
+      "title": "User"
+     },
+     "outcome": {
+      "$ref": "#/components/schemas/AuthOutcome"
+     },
+     "src_ip": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "ipv4"
+       },
+       {
+        "type": "string",
+        "format": "ipv6"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Src Ip"
+     },
+     "target_host": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Target Host"
+     },
+     "auth_method": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Auth Method"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "event_id",
+     "timestamp",
+     "source_dataset",
+     "data_origin",
+     "entity_id",
+     "user",
+     "outcome"
+    ],
+    "title": "AuthenticationEvent",
+    "description": "An authentication attempt. Credentials are never part of this schema."
+   },
+   "ChainReconstruction": {
+    "properties": {
+     "chains": {
+      "items": {
+       "$ref": "#/components/schemas/IncidentChain"
+      },
+      "type": "array",
+      "title": "Chains"
+     },
+     "unmapped_event_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Unmapped Event Ids",
+      "description": "Observed events with no technique evidence (no step)."
+     },
+     "correlation_policy": {
+      "$ref": "#/components/schemas/CorrelationPolicy"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "chains",
+     "correlation_policy"
+    ],
+    "title": "ChainReconstruction"
+   },
+   "CorrelationDecision": {
+    "properties": {
+     "event_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Event Id"
+     },
+     "chain_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Chain Id"
+     },
+     "rule": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Rule",
+      "description": "Rule that joined the chain, or 'new_chain'/'ambiguous'."
+     },
+     "matched_keys": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Matched Keys"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "event_id",
+     "chain_id",
+     "rule"
+    ],
+    "title": "CorrelationDecision"
+   },
+   "CorrelationHints": {
+    "properties": {
+     "incident_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Incident Id"
+     },
+     "session_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Session Id"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "title": "CorrelationHints",
+    "description": "Explicit correlation identifiers supplied by the event source (never guessed)."
+   },
+   "CorrelationPolicy": {
+    "properties": {
+     "version": {
+      "type": "string",
+      "title": "Version",
+      "default": "correlation-v1"
+     },
+     "window_minutes": {
+      "type": "number",
+      "exclusiveMinimum": 0.0,
+      "title": "Window Minutes",
+      "default": 120.0
+     },
+     "use_accounts": {
+      "type": "boolean",
+      "title": "Use Accounts",
+      "default": true
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "title": "CorrelationPolicy"
+   },
+   "CorrelationStatus": {
+    "type": "string",
+    "enum": [
+     "CORRELATED",
+     "STANDALONE",
+     "AMBIGUOUS"
+    ],
+    "title": "CorrelationStatus"
+   },
+   "Criticality": {
+    "type": "string",
+    "enum": [
+     "LOW",
+     "MEDIUM",
+     "HIGH",
+     "CRITICAL"
+    ],
+    "title": "Criticality"
+   },
+   "DataOrigin": {
+    "type": "string",
+    "enum": [
+     "REAL",
+     "SYNTHETIC"
+    ],
+    "title": "DataOrigin",
+    "description": "Where the data came from. Synthetic results must never be presented as real."
+   },
+   "Decision": {
+    "type": "string",
+    "enum": [
+     "ACKNOWLEDGED",
+     "APPROVED",
+     "REJECTED"
+    ],
+    "title": "Decision",
+    "description": "Analyst workflow decisions. Recording a decision executes nothing."
+   },
+   "DecisionRecord": {
+    "properties": {
+     "decision_id": {
+      "type": "integer",
+      "title": "Decision Id"
+     },
+     "assessment_id": {
+      "type": "string",
+      "title": "Assessment Id"
+     },
+     "recommendation_id": {
+      "type": "string",
+      "title": "Recommendation Id"
+     },
+     "decision": {
+      "$ref": "#/components/schemas/Decision"
+     },
+     "analyst": {
+      "type": "string",
+      "title": "Analyst"
+     },
+     "note": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Note"
+     },
+     "recorded_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Recorded At"
+     },
+     "executed": {
+      "type": "boolean",
+      "const": false,
+      "title": "Executed",
+      "default": false
+     },
+     "notice": {
+      "type": "string",
+      "title": "Notice",
+      "default": "RECOMMENDATION ONLY: the system executes nothing. Decisions are recorded for audit; any action is taken by humans outside this system."
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "decision_id",
+     "assessment_id",
+     "recommendation_id",
+     "decision",
+     "analyst",
+     "note",
+     "recorded_at"
+    ],
+    "title": "DecisionRecord"
+   },
+   "DecisionRequest": {
+    "properties": {
+     "decision": {
+      "$ref": "#/components/schemas/Decision"
+     },
+     "analyst": {
+      "type": "string",
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Analyst"
+     },
+     "note": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 2000
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Note"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "decision",
+     "analyst"
+    ],
+    "title": "DecisionRequest"
+   },
+   "DefenseAction": {
+    "type": "string",
+    "enum": [
+     "block_suspicious_access",
+     "isolate_affected_host",
+     "restrict_communication",
+     "disable_compromised_credentials",
+     "increase_monitoring",
+     "escalate_severity",
+     "collect_additional_evidence"
+    ],
+    "title": "DefenseAction",
+    "description": "The seven supported recommendation categories."
+   },
+   "DefenseRecommendation": {
+    "properties": {
+     "recommendation_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Recommendation Id"
+     },
+     "action": {
+      "$ref": "#/components/schemas/DefenseAction"
+     },
+     "target": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Target",
+      "description": "Entity the analyst should consider acting on."
+     },
+     "reason": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Reason"
+     },
+     "triggering_evidence": {
+      "items": {
+       "$ref": "#/components/schemas/EvidenceRef"
+      },
+      "type": "array",
+      "minItems": 1,
+      "title": "Triggering Evidence"
+     },
+     "risk_score": {
+      "type": "number",
+      "maximum": 100.0,
+      "minimum": 0.0,
+      "title": "Risk Score"
+     },
+     "risk_level": {
+      "$ref": "#/components/schemas/RiskLevel"
+     },
+     "attack_mitigation_ids": {
+      "items": {
+       "type": "string",
+       "pattern": "^M\\d{4}$"
+      },
+      "type": "array",
+      "title": "Attack Mitigation Ids"
+     },
+     "addresses_technique_ids": {
+      "items": {
+       "type": "string",
+       "pattern": "^T\\d{4}(\\.\\d{3})?$"
+      },
+      "type": "array",
+      "title": "Addresses Technique Ids"
+     },
+     "confidence": {
+      "type": "number",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Confidence"
+     },
+     "priority": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Priority"
+     },
+     "disruption": {
+      "$ref": "#/components/schemas/Disruption"
+     },
+     "reversible": {
+      "type": "boolean",
+      "title": "Reversible"
+     },
+     "requires_human_approval": {
+      "type": "boolean",
+      "const": true,
+      "title": "Requires Human Approval",
+      "default": true
+     },
+     "status": {
+      "$ref": "#/components/schemas/RecommendationStatus",
+      "default": "PROPOSED"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     },
+     "chain_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Chain Id"
+     },
+     "policy_version": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Policy Version"
+     },
+     "approval_note": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Approval Note",
+      "default": "RECOMMENDATION ONLY - requires human approval; the system executes nothing."
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "recommendation_id",
+     "action",
+     "target",
+     "reason",
+     "triggering_evidence",
+     "risk_score",
+     "risk_level",
+     "confidence",
+     "priority",
+     "disruption",
+     "reversible"
+    ],
+    "title": "DefenseRecommendation",
+    "description": "An advisory action for a human analyst to consider."
+   },
+   "DetectionEvidence": {
+    "properties": {
+     "event_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Event Id"
+     },
+     "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Timestamp"
+     },
+     "origin": {
+      "$ref": "#/components/schemas/DetectionOrigin"
+     },
+     "classical_model": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Classical Model"
+     },
+     "classical_model_version": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Classical Model Version"
+     },
+     "p_malicious": {
+      "type": "number",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "P Malicious"
+     },
+     "threshold": {
+      "type": "number",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Threshold"
+     },
+     "verdict": {
+      "$ref": "#/components/schemas/Verdict"
+     },
+     "quantum": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/QuantumOpinion"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "quantum_disagreement": {
+      "type": "boolean",
+      "title": "Quantum Disagreement",
+      "default": false
+     },
+     "evidence_status": {
+      "$ref": "#/components/schemas/EvidenceStatus",
+      "default": "NO SECOND OPINION"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "event_id",
+     "timestamp",
+     "origin",
+     "classical_model",
+     "classical_model_version",
+     "p_malicious",
+     "threshold",
+     "verdict"
+    ],
+    "title": "DetectionEvidence",
+    "description": "Classical decision plus optional quantum second opinion for one event."
+   },
+   "DetectionOrigin": {
+    "type": "string",
+    "enum": [
+     "MODEL_OUTPUT",
+     "SYNTHETIC_FIXTURE"
+    ],
+    "title": "DetectionOrigin"
+   },
+   "Disruption": {
+    "type": "string",
+    "enum": [
+     "NONE",
+     "LOW",
+     "MEDIUM",
+     "HIGH"
+    ],
+    "title": "Disruption"
+   },
+   "ErrorResponse": {
+    "properties": {
+     "detail": {
+      "type": "string",
+      "title": "Detail"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "detail"
+    ],
+    "title": "ErrorResponse"
+   },
+   "EvaluationStatus": {
+    "type": "string",
+    "enum": [
+     "EVALUATED",
+     "NOT_EVALUATED"
+    ],
+    "title": "EvaluationStatus"
+   },
+   "EvaluationTask": {
+    "type": "string",
+    "enum": [
+     "detection",
+     "quantum_comparison",
+     "chain_prediction",
+     "risk",
+     "defense",
+     "end_to_end"
+    ],
+    "title": "EvaluationTask"
+   },
+   "EvidenceRef": {
+    "properties": {
+     "kind": {
+      "type": "string",
+      "enum": [
+       "event",
+       "detection",
+       "chain_step",
+       "prediction",
+       "risk"
+      ],
+      "title": "Kind"
+     },
+     "ref_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Ref Id"
+     },
+     "description": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Description"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "kind",
+     "ref_id",
+     "description"
+    ],
+    "title": "EvidenceRef",
+    "description": "Pointer to the evidence that triggered a recommendation."
+   },
+   "EvidenceSource": {
+    "type": "string",
+    "enum": [
+     "CLASSICAL_DETECTOR",
+     "QUANTUM_SECOND_OPINION",
+     "ATTACK_FLOW",
+     "SYNTHETIC_SCENARIO",
+     "EXPLICIT_RULE"
+    ],
+    "title": "EvidenceSource",
+    "description": "Where a technique attribution comes from. No source is trusted by default."
+   },
+   "EvidenceStatus": {
+    "type": "string",
+    "enum": [
+     "NO SECOND OPINION",
+     "CONSISTENT",
+     "NEEDS ADDITIONAL EVIDENCE",
+     "CORROBORATED BY INDEPENDENT EVIDENCE"
+    ],
+    "title": "EvidenceStatus"
+   },
+   "ExpectedChain": {
+    "properties": {
+     "event_ids": {
+      "items": {
+       "type": "string",
+       "minLength": 1
+      },
+      "type": "array",
+      "minItems": 1,
+      "title": "Event Ids"
+     },
+     "status": {
+      "type": "string",
+      "enum": [
+       "CORRELATED",
+       "STANDALONE",
+       "AMBIGUOUS"
+      ],
+      "title": "Status"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "event_ids",
+     "status"
+    ],
+    "title": "ExpectedChain"
+   },
+   "HTTPValidationError": {
+    "properties": {
+     "detail": {
+      "items": {
+       "$ref": "#/components/schemas/ValidationError"
+      },
+      "type": "array",
+      "title": "Detail"
+     }
+    },
+    "type": "object",
+    "title": "HTTPValidationError"
+   },
+   "HealthResponse": {
+    "properties": {
+     "status": {
+      "type": "string",
+      "const": "ok",
+      "title": "Status",
+      "default": "ok"
+     },
+     "service": {
+      "type": "string",
+      "title": "Service",
+      "default": "hqc"
+     },
+     "version": {
+      "type": "string",
+      "title": "Version"
+     },
+     "schema_version": {
+      "type": "string",
+      "title": "Schema Version"
+     },
+     "attack_version": {
+      "type": "string",
+      "title": "Attack Version"
+     },
+     "environment": {
+      "type": "string",
+      "title": "Environment"
+     },
+     "time": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Time"
+     },
+     "defense_mode": {
+      "type": "string",
+      "const": "recommendation-only",
+      "title": "Defense Mode",
+      "default": "recommendation-only"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "version",
+     "schema_version",
+     "attack_version",
+     "environment",
+     "time"
+    ],
+    "title": "HealthResponse"
+   },
+   "IncidentAssessment": {
+    "properties": {
+     "chain": {
+      "$ref": "#/components/schemas/IncidentChain"
+     },
+     "prediction": {
+      "$ref": "#/components/schemas/NextTechniquePrediction"
+     },
+     "high_impact_next_step_probability": {
+      "type": "number",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "High Impact Next Step Probability"
+     },
+     "risk": {
+      "$ref": "#/components/schemas/RiskAssessment"
+     },
+     "recommendations": {
+      "items": {
+       "$ref": "#/components/schemas/DefenseRecommendation"
+      },
+      "type": "array",
+      "title": "Recommendations"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "chain",
+     "prediction",
+     "high_impact_next_step_probability",
+     "risk",
+     "recommendations"
+    ],
+    "title": "IncidentAssessment"
+   },
+   "IncidentChain": {
+    "properties": {
+     "chain_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Chain Id"
+     },
+     "status": {
+      "$ref": "#/components/schemas/CorrelationStatus"
+     },
+     "chain": {
+      "$ref": "#/components/schemas/AttackChain",
+      "description": "OBSERVED steps in arrival order (never re-sorted)."
+     },
+     "documented_steps": {
+      "items": {
+       "$ref": "#/components/schemas/AttackStep"
+      },
+      "type": "array",
+      "title": "Documented Steps",
+      "description": "DOCUMENTED CTI steps (e.g. Attack Flow); not events."
+     },
+     "decisions": {
+      "items": {
+       "$ref": "#/components/schemas/CorrelationDecision"
+      },
+      "type": "array",
+      "minItems": 1,
+      "title": "Decisions"
+     },
+     "resources": {
+      "items": {
+       "type": "string",
+       "minLength": 1
+      },
+      "type": "array",
+      "title": "Resources"
+     },
+     "detections": {
+      "items": {
+       "$ref": "#/components/schemas/DetectionEvidence"
+      },
+      "type": "array",
+      "title": "Detections"
+     },
+     "out_of_vocabulary_technique_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Out Of Vocabulary Technique Ids",
+      "description": "Observed IDs not active in ATT&CK 19.2 (<UNK>)."
+     },
+     "data_origin": {
+      "$ref": "#/components/schemas/DataOrigin"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "chain_id",
+     "status",
+     "chain",
+     "decisions",
+     "data_origin"
+    ],
+    "title": "IncidentChain",
+    "description": "Reconstructed incident: observed steps, documented reference steps, and context."
+   },
+   "MetaResponse": {
+    "properties": {
+     "api_version": {
+      "type": "string",
+      "const": "v1",
+      "title": "Api Version",
+      "default": "v1"
+     },
+     "defense_mode": {
+      "type": "string",
+      "const": "recommendation-only",
+      "title": "Defense Mode",
+      "default": "recommendation-only"
+     },
+     "attack_version": {
+      "type": "string",
+      "title": "Attack Version"
+     },
+     "vocabulary_version": {
+      "type": "string",
+      "title": "Vocabulary Version"
+     },
+     "model_versions": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "type": "object",
+      "title": "Model Versions"
+     },
+     "policy_versions": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "type": "object",
+      "title": "Policy Versions"
+     },
+     "claim_policy": {
+      "type": "string",
+      "title": "Claim Policy",
+      "default": "No quantum advantage is claimed; quantum kernels are simulated on a CPU."
+     },
+     "risk_label": {
+      "type": "string",
+      "const": "MODEL-DERIVED RISK SCORE",
+      "title": "Risk Label",
+      "default": "MODEL-DERIVED RISK SCORE"
+     },
+     "cic_label_policy": {
+      "type": "string",
+      "title": "Cic Label Policy",
+      "default": "CIC-IDS2017 attack labels are not MITRE ATT&CK techniques; no such mapping is applied."
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "attack_version",
+     "vocabulary_version",
+     "model_versions",
+     "policy_versions"
+    ],
+    "title": "MetaResponse"
+   },
+   "NetworkFlow": {
+    "properties": {
+     "event_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Event Id"
+     },
+     "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Timestamp"
+     },
+     "source_dataset": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Source Dataset",
+      "description": "Dataset or feed identifier, e.g. 'cicids2017' or 'synthetic-basic'."
+     },
+     "data_origin": {
+      "$ref": "#/components/schemas/DataOrigin"
+     },
+     "entity_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Entity Id",
+      "description": "Primary entity (host, IP or account) concerned."
+     },
+     "ground_truth_label": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Ground Truth Label",
+      "description": "Dataset label. For evaluation only; never used as a model input."
+     },
+     "event_type": {
+      "type": "string",
+      "const": "network_flow",
+      "title": "Event Type",
+      "default": "network_flow"
+     },
+     "src_ip": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "ipv4"
+       },
+       {
+        "type": "string",
+        "format": "ipv6"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Src Ip"
+     },
+     "dst_ip": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "ipv4"
+       },
+       {
+        "type": "string",
+        "format": "ipv6"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Dst Ip"
+     },
+     "src_port": {
+      "anyOf": [
+       {
+        "type": "integer",
+        "maximum": 65535.0,
+        "minimum": 0.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Src Port"
+     },
+     "dst_port": {
+      "anyOf": [
+       {
+        "type": "integer",
+        "maximum": 65535.0,
+        "minimum": 0.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Dst Port"
+     },
+     "protocol": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Protocol"
+     },
+     "duration_s": {
+      "anyOf": [
+       {
+        "type": "number",
+        "minimum": 0.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Duration S"
+     },
+     "features": {
+      "additionalProperties": {
+       "type": "number"
+      },
+      "type": "object",
+      "title": "Features",
+      "description": "Numeric flow features keyed by the dataset's canonical feature name."
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "event_id",
+     "timestamp",
+     "source_dataset",
+     "data_origin",
+     "entity_id"
+    ],
+    "title": "NetworkFlow",
+    "description": "A network flow record (e.g. one CIC-IDS2017 / UNSW-NB15 row)."
+   },
+   "NextTechniquePrediction": {
+    "properties": {
+     "chain_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Chain Id"
+     },
+     "result": {
+      "$ref": "#/components/schemas/PredictionResult"
+     },
+     "context_tokens": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "minItems": 1,
+      "title": "Context Tokens",
+      "description": "Model input history: observed IDs, <UNK> for non-vocabulary."
+     },
+     "model_versions": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "type": "object",
+      "title": "Model Versions"
+     },
+     "beam_width": {
+      "type": "integer",
+      "minimum": 1.0,
+      "title": "Beam Width"
+     },
+     "next_step_semantics": {
+      "type": "string",
+      "const": "NEXT-STEP PROBABILITY: model P(next technique | observed history); not calibrated",
+      "title": "Next Step Semantics",
+      "default": "NEXT-STEP PROBABILITY: model P(next technique | observed history); not calibrated"
+     },
+     "path_score_semantics": {
+      "type": "string",
+      "const": "PATH SCORE: joint model probability of one exact continuation; summed beam scores are a LOWER BOUND, not a calibrated probability of reaching a tactic",
+      "title": "Path Score Semantics",
+      "default": "PATH SCORE: joint model probability of one exact continuation; summed beam scores are a LOWER BOUND, not a calibrated probability of reaching a tactic"
+     },
+     "per_model_top_k": {
+      "additionalProperties": {
+       "items": {
+        "prefixItems": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "number"
+         }
+        ],
+        "type": "array",
+        "maxItems": 2,
+        "minItems": 2
+       },
+       "type": "array"
+      },
+      "type": "object",
+      "title": "Per Model Top K"
+     },
+     "provenance": {
+      "type": "string",
+      "const": "PREDICTED",
+      "title": "Provenance",
+      "default": "PREDICTED"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "chain_id",
+     "result",
+     "context_tokens",
+     "model_versions",
+     "beam_width"
+    ],
+    "title": "NextTechniquePrediction",
+    "description": "Prediction for a chain. Next-step probabilities and path scores are different things."
+   },
+   "NextTechniqueProbability": {
+    "properties": {
+     "technique_id": {
+      "type": "string",
+      "pattern": "^T\\d{4}(\\.\\d{3})?$",
+      "title": "Technique Id"
+     },
+     "probability": {
+      "type": "number",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Probability"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "technique_id",
+     "probability"
+    ],
+    "title": "NextTechniqueProbability"
+   },
+   "Observation": {
+    "properties": {
+     "event": {
+      "oneOf": [
+       {
+        "$ref": "#/components/schemas/NetworkFlow"
+       },
+       {
+        "$ref": "#/components/schemas/AuthenticationEvent"
+       },
+       {
+        "$ref": "#/components/schemas/SystemEvent"
+       },
+       {
+        "$ref": "#/components/schemas/APIEvent"
+       }
+      ],
+      "title": "Event",
+      "discriminator": {
+       "propertyName": "event_type",
+       "mapping": {
+        "api": "#/components/schemas/APIEvent",
+        "authentication": "#/components/schemas/AuthenticationEvent",
+        "network_flow": "#/components/schemas/NetworkFlow",
+        "system": "#/components/schemas/SystemEvent"
+       }
+      }
+     },
+     "detection": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/DetectionEvidence"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "techniques": {
+      "items": {
+       "$ref": "#/components/schemas/TechniqueEvidence"
+      },
+      "type": "array",
+      "title": "Techniques"
+     },
+     "hints": {
+      "$ref": "#/components/schemas/CorrelationHints"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "event"
+    ],
+    "title": "Observation",
+    "description": "A security event with everything known about it before correlation."
+   },
+   "PipelineOutput": {
+    "properties": {
+     "as_of": {
+      "type": "string",
+      "format": "date-time",
+      "title": "As Of"
+     },
+     "incidents": {
+      "items": {
+       "$ref": "#/components/schemas/IncidentAssessment"
+      },
+      "type": "array",
+      "title": "Incidents"
+     },
+     "unmapped_event_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Unmapped Event Ids"
+     },
+     "policy_versions": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "type": "object",
+      "title": "Policy Versions"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "as_of",
+     "incidents",
+     "unmapped_event_ids",
+     "policy_versions"
+    ],
+    "title": "PipelineOutput"
+   },
+   "PredictRequest": {
+    "properties": {
+     "chain": {
+      "$ref": "#/components/schemas/IncidentChain"
+     },
+     "as_of": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "As Of"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "chain"
+    ],
+    "title": "PredictRequest"
+   },
+   "PredictResponse": {
+    "properties": {
+     "prediction": {
+      "$ref": "#/components/schemas/NextTechniquePrediction"
+     },
+     "high_impact_next_step_probability": {
+      "type": "number",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "High Impact Next Step Probability"
+     },
+     "high_impact_tactics": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "High Impact Tactics"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "prediction",
+     "high_impact_next_step_probability",
+     "high_impact_tactics"
+    ],
+    "title": "PredictResponse"
+   },
+   "PredictedPath": {
+    "properties": {
+     "technique_ids": {
+      "items": {
+       "type": "string",
+       "pattern": "^T\\d{4}(\\.\\d{3})?$"
+      },
+      "type": "array",
+      "minItems": 1,
+      "title": "Technique Ids"
+     },
+     "probability": {
+      "type": "number",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Probability",
+      "description": "Joint probability of the continuation."
+     },
+     "cumulative_log_score": {
+      "type": "number",
+      "maximum": 0.0,
+      "title": "Cumulative Log Score"
+     },
+     "length": {
+      "type": "integer",
+      "minimum": 1.0,
+      "title": "Length"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "technique_ids",
+     "probability",
+     "cumulative_log_score",
+     "length"
+    ],
+    "title": "PredictedPath",
+    "description": "A candidate future path produced by beam search."
+   },
+   "PredictionResult": {
+    "properties": {
+     "prediction_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Prediction Id"
+     },
+     "chain_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Chain Id"
+     },
+     "observed_prefix": {
+      "items": {
+       "type": "string",
+       "pattern": "^T\\d{4}(\\.\\d{3})?$"
+      },
+      "type": "array",
+      "minItems": 1,
+      "title": "Observed Prefix"
+     },
+     "next_step": {
+      "items": {
+       "$ref": "#/components/schemas/NextTechniqueProbability"
+      },
+      "type": "array",
+      "title": "Next Step"
+     },
+     "paths": {
+      "items": {
+       "$ref": "#/components/schemas/PredictedPath"
+      },
+      "type": "array",
+      "title": "Paths"
+     },
+     "horizon": {
+      "type": "integer",
+      "minimum": 1.0,
+      "title": "Horizon"
+     },
+     "model_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Model Id"
+     },
+     "vocabulary_version": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Vocabulary Version"
+     },
+     "attack_version": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Attack Version"
+     },
+     "provenance": {
+      "type": "string",
+      "const": "PREDICTED",
+      "title": "Provenance",
+      "default": "PREDICTED"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "prediction_id",
+     "observed_prefix",
+     "horizon",
+     "model_id",
+     "vocabulary_version",
+     "attack_version"
+    ],
+    "title": "PredictionResult",
+    "description": "Next-step distribution and multi-step paths for an observed prefix."
+   },
+   "QuantumOpinion": {
+    "properties": {
+     "gate_triggered": {
+      "type": "boolean",
+      "title": "Gate Triggered",
+      "description": "Whether the QuantumGate sent this event onward."
+     },
+     "verdict": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/Verdict"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "p_malicious": {
+      "anyOf": [
+       {
+        "type": "number",
+        "maximum": 1.0,
+        "minimum": 0.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "P Malicious"
+     },
+     "confidence": {
+      "anyOf": [
+       {
+        "type": "number",
+        "maximum": 1.0,
+        "minimum": 0.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Confidence"
+     },
+     "backend": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Backend",
+      "description": "Simulator identifier."
+     },
+     "feature_map": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Feature Map"
+     },
+     "latency_ms": {
+      "anyOf": [
+       {
+        "type": "number",
+        "minimum": 0.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Latency Ms"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "gate_triggered"
+    ],
+    "title": "QuantumOpinion",
+    "description": "Result of the quantum second-opinion classifier for one event.\n\nThe quantum opinion never overrides the classical verdict automatically;\ndisagreement is a signal to collect additional evidence."
+   },
+   "RecommendationStatus": {
+    "type": "string",
+    "enum": [
+     "PROPOSED",
+     "ACKNOWLEDGED",
+     "APPROVED",
+     "REJECTED"
+    ],
+    "title": "RecommendationStatus",
+    "description": "Analyst workflow state. Approval records a human decision; it executes nothing."
+   },
+   "RecommendationView": {
+    "properties": {
+     "assessment_id": {
+      "type": "string",
+      "title": "Assessment Id"
+     },
+     "recommendation": {
+      "$ref": "#/components/schemas/DefenseRecommendation"
+     },
+     "decisions": {
+      "items": {
+       "$ref": "#/components/schemas/DecisionRecord"
+      },
+      "type": "array",
+      "title": "Decisions"
+     },
+     "latest_decision": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/Decision"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "executed": {
+      "type": "boolean",
+      "const": false,
+      "title": "Executed",
+      "default": false
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "assessment_id",
+     "recommendation",
+     "decisions",
+     "latest_decision"
+    ],
+    "title": "RecommendationView"
+   },
+   "ReconstructRequest": {
+    "properties": {
+     "observations": {
+      "items": {
+       "$ref": "#/components/schemas/Observation"
+      },
+      "type": "array",
+      "maxItems": 1000,
+      "minItems": 1,
+      "title": "Observations"
+     },
+     "as_of": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "As Of"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "observations"
+    ],
+    "title": "ReconstructRequest"
+   },
+   "ResourceContext": {
+    "properties": {
+     "resource_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Resource Id"
+     },
+     "resource_type": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Resource Type"
+     },
+     "criticality": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/Criticality"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "owner": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Owner"
+     },
+     "environment": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Environment"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "resource_id"
+    ],
+    "title": "ResourceContext",
+    "description": "Optional asset metadata. Criticality is never invented: absent means 'not provided'."
+   },
+   "RiskAssessment": {
+    "properties": {
+     "assessment_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Assessment Id"
+     },
+     "entity_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Entity Id"
+     },
+     "chain_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Chain Id"
+     },
+     "score": {
+      "type": "number",
+      "maximum": 100.0,
+      "minimum": 0.0,
+      "title": "Score"
+     },
+     "level": {
+      "$ref": "#/components/schemas/RiskLevel"
+     },
+     "components": {
+      "items": {
+       "$ref": "#/components/schemas/RiskComponent"
+      },
+      "type": "array",
+      "minItems": 1,
+      "title": "Components"
+     },
+     "reasons": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Reasons"
+     },
+     "affected_assets": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Affected Assets"
+     },
+     "uncertainty": {
+      "anyOf": [
+       {
+        "type": "number",
+        "maximum": 1.0,
+        "minimum": 0.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Uncertainty"
+     },
+     "label": {
+      "type": "string",
+      "const": "MODEL-DERIVED RISK SCORE",
+      "title": "Label",
+      "default": "MODEL-DERIVED RISK SCORE"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     },
+     "observed_technique_ids": {
+      "items": {
+       "type": "string",
+       "pattern": "^T\\d{4}(\\.\\d{3})?$"
+      },
+      "type": "array",
+      "title": "Observed Technique Ids"
+     },
+     "predicted_technique_ids": {
+      "items": {
+       "type": "string",
+       "pattern": "^T\\d{4}(\\.\\d{3})?$"
+      },
+      "type": "array",
+      "title": "Predicted Technique Ids",
+      "description": "Top predicted next techniques (PREDICTED, not observed)."
+     },
+     "model_versions": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "type": "object",
+      "title": "Model Versions"
+     },
+     "policy_version": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Policy Version"
+     },
+     "quantum_disagreement": {
+      "type": "boolean",
+      "title": "Quantum Disagreement",
+      "default": false
+     },
+     "evidence_status": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Evidence Status",
+      "description": "Worst evidence status across the chain's detections."
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "assessment_id",
+     "score",
+     "level",
+     "components"
+    ],
+    "title": "RiskAssessment",
+    "description": "Explainable risk for an entity and/or chain."
+   },
+   "RiskComponent": {
+    "properties": {
+     "name": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Name"
+     },
+     "value": {
+      "type": "number",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Value",
+      "description": "Normalised component value in [0, 1]."
+     },
+     "weight": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Weight"
+     },
+     "contribution": {
+      "type": "number",
+      "maximum": 100.0,
+      "minimum": 0.0,
+      "title": "Contribution",
+      "description": "Points contributed to the score."
+     },
+     "reason": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Reason"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "name",
+     "value",
+     "weight",
+     "contribution",
+     "reason"
+    ],
+    "title": "RiskComponent",
+    "description": "One explainable contribution to the risk score."
+   },
+   "RiskLevel": {
+    "type": "string",
+    "enum": [
+     "LOW",
+     "MEDIUM",
+     "HIGH",
+     "CRITICAL"
+    ],
+    "title": "RiskLevel"
+   },
+   "RiskRequest": {
+    "properties": {
+     "chain": {
+      "$ref": "#/components/schemas/IncidentChain"
+     },
+     "prediction": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/NextTechniquePrediction"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "high_impact_next_step_probability": {
+      "anyOf": [
+       {
+        "type": "number",
+        "maximum": 1.0,
+        "minimum": 0.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "High Impact Next Step Probability"
+     },
+     "resources": {
+      "items": {
+       "$ref": "#/components/schemas/ResourceContext"
+      },
+      "type": "array",
+      "maxItems": 1000,
+      "title": "Resources"
+     },
+     "as_of": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "As Of"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "chain"
+    ],
+    "title": "RiskRequest"
+   },
+   "RunSummary": {
+    "properties": {
+     "run_id": {
+      "type": "string",
+      "title": "Run Id"
+     },
+     "task": {
+      "$ref": "#/components/schemas/EvaluationTask"
+     },
+     "status": {
+      "$ref": "#/components/schemas/EvaluationStatus"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     },
+     "dataset_id": {
+      "type": "string",
+      "title": "Dataset Id"
+     },
+     "dataset_version": {
+      "type": "string",
+      "title": "Dataset Version"
+     },
+     "data_origin": {
+      "$ref": "#/components/schemas/DataOrigin"
+     },
+     "attack_version": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Attack Version"
+     },
+     "git_dirty": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Git Dirty"
+     },
+     "runtime_s": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Runtime S"
+     },
+     "metrics": {
+      "additionalProperties": {
+       "type": "number"
+      },
+      "type": "object",
+      "title": "Metrics"
+     },
+     "notes": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Notes"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "run_id",
+     "task",
+     "status",
+     "created_at",
+     "dataset_id",
+     "dataset_version",
+     "data_origin",
+     "attack_version",
+     "git_dirty",
+     "runtime_s",
+     "metrics",
+     "notes"
+    ],
+    "title": "RunSummary",
+    "description": "Stored evaluation record without internal paths, environment or configuration."
+   },
+   "ScenarioAnnotation": {
+    "properties": {
+     "technique_id": {
+      "type": "string",
+      "pattern": "^T\\d{4}(\\.\\d{3})?$",
+      "title": "Technique Id"
+     },
+     "tactic_id": {
+      "type": "string",
+      "pattern": "^TA\\d{4}$",
+      "title": "Tactic Id"
+     },
+     "confidence": {
+      "type": "number",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Confidence"
+     },
+     "evidence": {
+      "items": {
+       "type": "string",
+       "minLength": 1
+      },
+      "type": "array",
+      "minItems": 1,
+      "title": "Evidence"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "technique_id",
+     "tactic_id",
+     "confidence",
+     "evidence"
+    ],
+    "title": "ScenarioAnnotation"
+   },
+   "ScenarioDetection": {
+    "properties": {
+     "p_malicious": {
+      "type": "number",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "P Malicious"
+     },
+     "threshold": {
+      "type": "number",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Threshold",
+      "default": 0.5
+     },
+     "quantum_p_malicious": {
+      "anyOf": [
+       {
+        "type": "number",
+        "maximum": 1.0,
+        "minimum": 0.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Quantum P Malicious"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "p_malicious"
+    ],
+    "title": "ScenarioDetection",
+    "description": "Hand-authored detector scores (SYNTHETIC_FIXTURE); not produced by any trained model."
+   },
+   "ScenarioExpectations": {
+    "properties": {
+     "chains": {
+      "items": {
+       "$ref": "#/components/schemas/ExpectedChain"
+      },
+      "type": "array",
+      "title": "Chains"
+     },
+     "unmapped_event_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Unmapped Event Ids"
+     },
+     "evidence_status": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "type": "object",
+      "title": "Evidence Status"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "chains"
+    ],
+    "title": "ScenarioExpectations"
+   },
+   "ScenarioObservation": {
+    "properties": {
+     "event": {
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Event"
+     },
+     "detection": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ScenarioDetection"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "annotations": {
+      "items": {
+       "$ref": "#/components/schemas/ScenarioAnnotation"
+      },
+      "type": "array",
+      "title": "Annotations"
+     },
+     "hints": {
+      "$ref": "#/components/schemas/CorrelationHints"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "event"
+    ],
+    "title": "ScenarioObservation"
+   },
+   "StepProvenance": {
+    "type": "string",
+    "enum": [
+     "OBSERVED",
+     "DOCUMENTED",
+     "INFERRED",
+     "PREDICTED"
+    ],
+    "title": "StepProvenance",
+    "description": "How an attack-chain step became known."
+   },
+   "SyntheticScenario": {
+    "properties": {
+     "scenario_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Scenario Id"
+     },
+     "version": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Version"
+     },
+     "data_origin": {
+      "type": "string",
+      "const": "SYNTHETIC",
+      "title": "Data Origin"
+     },
+     "notice": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Notice"
+     },
+     "description": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Description"
+     },
+     "attack_version": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Attack Version"
+     },
+     "as_of": {
+      "type": "string",
+      "format": "date-time",
+      "title": "As Of"
+     },
+     "resources": {
+      "items": {
+       "$ref": "#/components/schemas/ResourceContext"
+      },
+      "type": "array",
+      "title": "Resources"
+     },
+     "observations": {
+      "items": {
+       "$ref": "#/components/schemas/ScenarioObservation"
+      },
+      "type": "array",
+      "minItems": 1,
+      "title": "Observations"
+     },
+     "expected": {
+      "$ref": "#/components/schemas/ScenarioExpectations"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "scenario_id",
+     "version",
+     "data_origin",
+     "notice",
+     "description",
+     "attack_version",
+     "as_of",
+     "observations",
+     "expected"
+    ],
+    "title": "SyntheticScenario"
+   },
+   "SystemEvent": {
+    "properties": {
+     "event_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Event Id"
+     },
+     "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Timestamp"
+     },
+     "source_dataset": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Source Dataset",
+      "description": "Dataset or feed identifier, e.g. 'cicids2017' or 'synthetic-basic'."
+     },
+     "data_origin": {
+      "$ref": "#/components/schemas/DataOrigin"
+     },
+     "entity_id": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Entity Id",
+      "description": "Primary entity (host, IP or account) concerned."
+     },
+     "ground_truth_label": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Ground Truth Label",
+      "description": "Dataset label. For evaluation only; never used as a model input."
+     },
+     "event_type": {
+      "type": "string",
+      "const": "system",
+      "title": "Event Type",
+      "default": "system"
+     },
+     "host": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Host"
+     },
+     "action": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Action",
+      "description": "Normalised action, e.g. 'process_start'."
+     },
+     "process_name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Process Name"
+     },
+     "user": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "User"
+     },
+     "details": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "type": "object",
+      "title": "Details"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "event_id",
+     "timestamp",
+     "source_dataset",
+     "data_origin",
+     "entity_id",
+     "host",
+     "action"
+    ],
+    "title": "SystemEvent",
+    "description": "A host-level event (process, service, file or configuration activity)."
+   },
+   "TechniqueCandidate": {
+    "properties": {
+     "technique_id": {
+      "type": "string",
+      "pattern": "^T\\d{4}(\\.\\d{3})?$",
+      "title": "Technique Id"
+     },
+     "confidence": {
+      "type": "number",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Confidence"
+     },
+     "evidence": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Evidence"
+     },
+     "mapping_source": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Mapping Source",
+      "description": "e.g. 'mapping:cicids2017@1'."
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "technique_id",
+     "confidence",
+     "mapping_source"
+    ],
+    "title": "TechniqueCandidate",
+    "description": "A candidate technique produced by mapping, with confidence and evidence.\n\nA single network flow rarely identifies a technique uniquely, so mappings\nproduce one or more candidates rather than a single answer."
+   },
+   "TechniqueEvidence": {
+    "properties": {
+     "technique_id": {
+      "type": "string",
+      "pattern": "^T\\d{4}(\\.\\d{3})?$",
+      "title": "Technique Id"
+     },
+     "tactic_id": {
+      "anyOf": [
+       {
+        "type": "string",
+        "pattern": "^TA\\d{4}$"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Tactic Id",
+      "description": "Tactic the evidence attributes (must be a tactic of the technique)."
+     },
+     "event_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Event Id",
+      "description": "Security event; None for ATTACK_FLOW."
+     },
+     "timestamp": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Timestamp"
+     },
+     "confidence": {
+      "type": "number",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Confidence"
+     },
+     "source": {
+      "$ref": "#/components/schemas/EvidenceSource"
+     },
+     "evidence": {
+      "items": {
+       "type": "string",
+       "minLength": 1
+      },
+      "type": "array",
+      "minItems": 1,
+      "title": "Evidence",
+      "description": "Why this attribution was made."
+     },
+     "reference": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Reference",
+      "description": "Rule ID, scenario ID@version, Attack Flow document or detector version."
+     },
+     "detection_model": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Detection Model"
+     },
+     "model_version": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Model Version"
+     }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+     "technique_id",
+     "confidence",
+     "source",
+     "evidence",
+     "reference"
+    ],
+    "title": "TechniqueEvidence",
+    "description": "One piece of evidence that an ATT&CK technique occurred (or is documented)."
+   },
+   "ValidationError": {
+    "properties": {
+     "loc": {
+      "items": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "integer"
+        }
+       ]
+      },
+      "type": "array",
+      "title": "Location"
+     },
+     "msg": {
+      "type": "string",
+      "title": "Message"
+     },
+     "type": {
+      "type": "string",
+      "title": "Error Type"
+     },
+     "input": {
+      "title": "Input"
+     },
+     "ctx": {
+      "type": "object",
+      "title": "Context"
+     }
+    },
+    "type": "object",
+    "required": [
+     "loc",
+     "msg",
+     "type"
+    ],
+    "title": "ValidationError"
+   },
+   "Verdict": {
+    "type": "string",
+    "enum": [
+     "BENIGN",
+     "MALICIOUS"
+    ],
+    "title": "Verdict"
+   }
+  }
+ }
+}

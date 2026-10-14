@@ -1,0 +1,485 @@
+[
+ {
+  "assessment_id": "asm-755b2bdbca554f84",
+  "recommendation": {
+   "recommendation_id": "rec-chain-syn-ms-e01-escalate_severity-db-01.example.test",
+   "action": "escalate_severity",
+   "target": "db-01.example.test",
+   "reason": "escalate to a SOC analyst for review. MODEL-DERIVED RISK SCORE: 76.4 (CRITICAL); evidence status: NEEDS ADDITIONAL EVIDENCE.",
+   "triggering_evidence": [
+    {
+     "kind": "risk",
+     "ref_id": "risk-chain-syn-ms-e01",
+     "description": "MODEL-DERIVED RISK SCORE 76.4 (CRITICAL)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e01",
+     "description": "OBSERVED T1190 (TA0001)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e03",
+     "description": "OBSERVED T1059.004 (TA0002)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e04",
+     "description": "OBSERVED T1098.004 (TA0003)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e05",
+     "description": "OBSERVED T1003.008 (TA0006)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e06",
+     "description": "OBSERVED T1021.004 (TA0008)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e08",
+     "description": "OBSERVED T1041 (TA0010)"
+    },
+    {
+     "kind": "prediction",
+     "ref_id": "pred-chain-syn-ms-e01",
+     "description": "PREDICTED next T1105 (next-step probability 0.090)"
+    }
+   ],
+   "risk_score": 76.4492,
+   "risk_level": "CRITICAL",
+   "attack_mitigation_ids": [
+    "M1016",
+    "M1018",
+    "M1022",
+    "M1026",
+    "M1027",
+    "M1030",
+    "M1031",
+    "M1032",
+    "M1035",
+    "M1037",
+    "M1038",
+    "M1042",
+    "M1048",
+    "M1050",
+    "M1051",
+    "M1057"
+   ],
+   "addresses_technique_ids": [
+    "T1003.008",
+    "T1021.004",
+    "T1041",
+    "T1059.004",
+    "T1098.004",
+    "T1105",
+    "T1190"
+   ],
+   "confidence": 0.6388888888888888,
+   "priority": 68.8043,
+   "disruption": "NONE",
+   "reversible": true,
+   "requires_human_approval": true,
+   "status": "PROPOSED",
+   "created_at": "2026-01-15T09:35:00Z",
+   "chain_id": "chain-syn-ms-e01",
+   "policy_version": "defense-policy-v1",
+   "approval_note": "RECOMMENDATION ONLY - requires human approval; the system executes nothing."
+  },
+  "decisions": [],
+  "latest_decision": null,
+  "executed": false
+ },
+ {
+  "assessment_id": "asm-755b2bdbca554f84",
+  "recommendation": {
+   "recommendation_id": "rec-chain-syn-ms-e01-restrict_communication-db-01.example.test",
+   "action": "restrict_communication",
+   "target": "db-01.example.test",
+   "reason": "HIGH risk: consider restricting suspicious communication of the affected resource (pending human approval). MODEL-DERIVED RISK SCORE: 76.4 (CRITICAL); evidence status: NEEDS ADDITIONAL EVIDENCE.",
+   "triggering_evidence": [
+    {
+     "kind": "risk",
+     "ref_id": "risk-chain-syn-ms-e01",
+     "description": "MODEL-DERIVED RISK SCORE 76.4 (CRITICAL)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e01",
+     "description": "OBSERVED T1190 (TA0001)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e03",
+     "description": "OBSERVED T1059.004 (TA0002)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e04",
+     "description": "OBSERVED T1098.004 (TA0003)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e05",
+     "description": "OBSERVED T1003.008 (TA0006)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e06",
+     "description": "OBSERVED T1021.004 (TA0008)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e08",
+     "description": "OBSERVED T1041 (TA0010)"
+    },
+    {
+     "kind": "prediction",
+     "ref_id": "pred-chain-syn-ms-e01",
+     "description": "PREDICTED next T1105 (next-step probability 0.090)"
+    }
+   ],
+   "risk_score": 76.4492,
+   "risk_level": "CRITICAL",
+   "attack_mitigation_ids": [
+    "M1016",
+    "M1018",
+    "M1022",
+    "M1026",
+    "M1027",
+    "M1030",
+    "M1031",
+    "M1032",
+    "M1035",
+    "M1037",
+    "M1038",
+    "M1042",
+    "M1048",
+    "M1050",
+    "M1051",
+    "M1057"
+   ],
+   "addresses_technique_ids": [
+    "T1003.008",
+    "T1021.004",
+    "T1041",
+    "T1059.004",
+    "T1098.004",
+    "T1105",
+    "T1190"
+   ],
+   "confidence": 0.6388888888888888,
+   "priority": 53.5144,
+   "disruption": "MEDIUM",
+   "reversible": true,
+   "requires_human_approval": true,
+   "status": "PROPOSED",
+   "created_at": "2026-01-15T09:35:00Z",
+   "chain_id": "chain-syn-ms-e01",
+   "policy_version": "defense-policy-v1",
+   "approval_note": "RECOMMENDATION ONLY - requires human approval; the system executes nothing."
+  },
+  "decisions": [],
+  "latest_decision": null,
+  "executed": false
+ },
+ {
+  "assessment_id": "asm-755b2bdbca554f84",
+  "recommendation": {
+   "recommendation_id": "rec-chain-syn-ms-e01-collect_additional_evidence-web-01.example.test",
+   "action": "collect_additional_evidence",
+   "target": "web-01.example.test",
+   "reason": "classical and quantum opinions disagree without independent corroboration, or risk is MEDIUM: collect more evidence before acting. MODEL-DERIVED RISK SCORE: 76.4 (CRITICAL); evidence status: NEEDS ADDITIONAL EVIDENCE.",
+   "triggering_evidence": [
+    {
+     "kind": "risk",
+     "ref_id": "risk-chain-syn-ms-e01",
+     "description": "MODEL-DERIVED RISK SCORE 76.4 (CRITICAL)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e01",
+     "description": "OBSERVED T1190 (TA0001)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e03",
+     "description": "OBSERVED T1059.004 (TA0002)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e04",
+     "description": "OBSERVED T1098.004 (TA0003)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e05",
+     "description": "OBSERVED T1003.008 (TA0006)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e06",
+     "description": "OBSERVED T1021.004 (TA0008)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e08",
+     "description": "OBSERVED T1041 (TA0010)"
+    },
+    {
+     "kind": "prediction",
+     "ref_id": "pred-chain-syn-ms-e01",
+     "description": "PREDICTED next T1105 (next-step probability 0.090)"
+    },
+    {
+     "kind": "detection",
+     "ref_id": "syn-ms-e04",
+     "description": "NEEDS ADDITIONAL EVIDENCE (quantum disagreement)"
+    }
+   ],
+   "risk_score": 76.4492,
+   "risk_level": "CRITICAL",
+   "attack_mitigation_ids": [
+    "M1016",
+    "M1018",
+    "M1022",
+    "M1026",
+    "M1027",
+    "M1030",
+    "M1031",
+    "M1032",
+    "M1035",
+    "M1037",
+    "M1038",
+    "M1042",
+    "M1048",
+    "M1050",
+    "M1051",
+    "M1057"
+   ],
+   "addresses_technique_ids": [
+    "T1003.008",
+    "T1021.004",
+    "T1041",
+    "T1059.004",
+    "T1098.004",
+    "T1105",
+    "T1190"
+   ],
+   "confidence": 0.6388888888888888,
+   "priority": 38.2246,
+   "disruption": "NONE",
+   "reversible": true,
+   "requires_human_approval": true,
+   "status": "PROPOSED",
+   "created_at": "2026-01-15T09:35:00Z",
+   "chain_id": "chain-syn-ms-e01",
+   "policy_version": "defense-policy-v1",
+   "approval_note": "RECOMMENDATION ONLY - requires human approval; the system executes nothing."
+  },
+  "decisions": [],
+  "latest_decision": null,
+  "executed": false
+ },
+ {
+  "assessment_id": "asm-755b2bdbca554f84",
+  "recommendation": {
+   "recommendation_id": "rec-chain-syn-ms-e01-increase_monitoring-db-01.example.test",
+   "action": "increase_monitoring",
+   "target": "db-01.example.test",
+   "reason": "continue / increase monitoring of the affected resource. MODEL-DERIVED RISK SCORE: 76.4 (CRITICAL); evidence status: NEEDS ADDITIONAL EVIDENCE.",
+   "triggering_evidence": [
+    {
+     "kind": "risk",
+     "ref_id": "risk-chain-syn-ms-e01",
+     "description": "MODEL-DERIVED RISK SCORE 76.4 (CRITICAL)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e01",
+     "description": "OBSERVED T1190 (TA0001)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e03",
+     "description": "OBSERVED T1059.004 (TA0002)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e04",
+     "description": "OBSERVED T1098.004 (TA0003)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e05",
+     "description": "OBSERVED T1003.008 (TA0006)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e06",
+     "description": "OBSERVED T1021.004 (TA0008)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e08",
+     "description": "OBSERVED T1041 (TA0010)"
+    },
+    {
+     "kind": "prediction",
+     "ref_id": "pred-chain-syn-ms-e01",
+     "description": "PREDICTED next T1105 (next-step probability 0.090)"
+    }
+   ],
+   "risk_score": 76.4492,
+   "risk_level": "CRITICAL",
+   "attack_mitigation_ids": [
+    "M1016",
+    "M1018",
+    "M1022",
+    "M1026",
+    "M1027",
+    "M1030",
+    "M1031",
+    "M1032",
+    "M1035",
+    "M1037",
+    "M1038",
+    "M1042",
+    "M1048",
+    "M1050",
+    "M1051",
+    "M1057"
+   ],
+   "addresses_technique_ids": [
+    "T1003.008",
+    "T1021.004",
+    "T1041",
+    "T1059.004",
+    "T1098.004",
+    "T1105",
+    "T1190"
+   ],
+   "confidence": 0.6388888888888888,
+   "priority": 22.9348,
+   "disruption": "NONE",
+   "reversible": true,
+   "requires_human_approval": true,
+   "status": "PROPOSED",
+   "created_at": "2026-01-15T09:35:00Z",
+   "chain_id": "chain-syn-ms-e01",
+   "policy_version": "defense-policy-v1",
+   "approval_note": "RECOMMENDATION ONLY - requires human approval; the system executes nothing."
+  },
+  "decisions": [],
+  "latest_decision": null,
+  "executed": false
+ },
+ {
+  "assessment_id": "asm-755b2bdbca554f84",
+  "recommendation": {
+   "recommendation_id": "rec-chain-syn-ms-e07-collect_additional_evidence-mail-01.example.test",
+   "action": "collect_additional_evidence",
+   "target": "mail-01.example.test",
+   "reason": "MEDIUM risk: collect more evidence before acting. MODEL-DERIVED RISK SCORE: 44.4 (MEDIUM); evidence status: NO SECOND OPINION.",
+   "triggering_evidence": [
+    {
+     "kind": "risk",
+     "ref_id": "risk-chain-syn-ms-e07",
+     "description": "MODEL-DERIVED RISK SCORE 44.4 (MEDIUM)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e07",
+     "description": "OBSERVED T1110.001 (TA0006)"
+    },
+    {
+     "kind": "prediction",
+     "ref_id": "pred-chain-syn-ms-e07",
+     "description": "PREDICTED next T1105 (next-step probability 0.024)"
+    }
+   ],
+   "risk_score": 44.3788,
+   "risk_level": "MEDIUM",
+   "attack_mitigation_ids": [
+    "M1027",
+    "M1031",
+    "M1032",
+    "M1036",
+    "M1037",
+    "M1051"
+   ],
+   "addresses_technique_ids": [
+    "T1105",
+    "T1110.001"
+   ],
+   "confidence": 0.4,
+   "priority": 22.1894,
+   "disruption": "NONE",
+   "reversible": true,
+   "requires_human_approval": true,
+   "status": "PROPOSED",
+   "created_at": "2026-01-15T09:35:00Z",
+   "chain_id": "chain-syn-ms-e07",
+   "policy_version": "defense-policy-v1",
+   "approval_note": "RECOMMENDATION ONLY - requires human approval; the system executes nothing."
+  },
+  "decisions": [],
+  "latest_decision": null,
+  "executed": false
+ },
+ {
+  "assessment_id": "asm-755b2bdbca554f84",
+  "recommendation": {
+   "recommendation_id": "rec-chain-syn-ms-e07-increase_monitoring-mail-01.example.test",
+   "action": "increase_monitoring",
+   "target": "mail-01.example.test",
+   "reason": "continue / increase monitoring of the affected resource. MODEL-DERIVED RISK SCORE: 44.4 (MEDIUM); evidence status: NO SECOND OPINION.",
+   "triggering_evidence": [
+    {
+     "kind": "risk",
+     "ref_id": "risk-chain-syn-ms-e07",
+     "description": "MODEL-DERIVED RISK SCORE 44.4 (MEDIUM)"
+    },
+    {
+     "kind": "chain_step",
+     "ref_id": "syn-ms-e07",
+     "description": "OBSERVED T1110.001 (TA0006)"
+    },
+    {
+     "kind": "prediction",
+     "ref_id": "pred-chain-syn-ms-e07",
+     "description": "PREDICTED next T1105 (next-step probability 0.024)"
+    }
+   ],
+   "risk_score": 44.3788,
+   "risk_level": "MEDIUM",
+   "attack_mitigation_ids": [
+    "M1027",
+    "M1031",
+    "M1032",
+    "M1036",
+    "M1037",
+    "M1051"
+   ],
+   "addresses_technique_ids": [
+    "T1105",
+    "T1110.001"
+   ],
+   "confidence": 0.4,
+   "priority": 13.3136,
+   "disruption": "NONE",
+   "reversible": true,
+   "requires_human_approval": true,
+   "status": "PROPOSED",
+   "created_at": "2026-01-15T09:35:00Z",
+   "chain_id": "chain-syn-ms-e07",
+   "policy_version": "defense-policy-v1",
+   "approval_note": "RECOMMENDATION ONLY - requires human approval; the system executes nothing."
+  },
+  "decisions": [],
+  "latest_decision": null,
+  "executed": false
+ }
+]
