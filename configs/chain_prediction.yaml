@@ -1,0 +1,54 @@
+# Milestone 3: next-technique prediction baselines (Markov). Loaded by
+# hqc.evaluation.chain_prediction.load_experiment_config. Grids are fixed BEFORE the
+# real run; each model is tuned only on outer-training groups (nested LOGO).
+# Grid history: the initial grids (B1 beta <= 10, M1/M2 alpha <= 10/5) were widened
+# after a timing trial whose INNER tuning (training groups only, 3 folds) selected
+# boundary values. No outer-test result had been computed. See docs/EVALUATION.md.
+
+seed: 42                      # bootstrap resampling seed (models are deterministic)
+bootstrap_resamples: 10000    # resamples of groups for 95% CIs
+confidence: 0.95
+selection_metric: log_loss    # inner-fold group-macro mean log loss (lower is better)
+
+primary_weighting: document
+ablation_weightings: [raw, unique]
+
+models:
+  - name: B0                  # uniform, no hyperparameters
+    grid: []
+  - name: B1                  # frequency (order 0): beta = unigram->uniform pseudo-instances
+    grid_product:
+      max_order: [0]
+      weights: [[]]
+      alpha: [1.0]            # unused at order 0
+      beta: [0.01, 0.1, 1.0, 10.0, 100.0, 1000.0, 10000.0]
+  - name: M1                  # first-order Markov
+    grid_product:
+      max_order: [1]
+      weights: [[1.0]]
+      alpha: [0.1, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0, 50.0, 100.0, 1000.0]
+      beta: [0.01, 0.1, 1.0, 10.0, 100.0, 1000.0, 10000.0]
+  - name: M2                  # variable-order (K = 2 or 3) interpolated Markov
+    grid_product:
+      max_order: [2]
+      weights: [[0.9, 0.1], [0.7, 0.3], [0.5, 0.5], [0.3, 0.7], [0.0, 1.0]]
+      alpha: [0.5, 1.0, 2.0, 5.0, 10.0, 20.0, 50.0, 100.0, 1000.0]
+      beta: [0.1, 1.0, 10.0, 100.0, 1000.0]
+    grid_product_extra:
+      max_order: [3]
+      weights:
+        - [0.5, 0.3, 0.2]
+        - [0.34, 0.33, 0.33]
+        - [0.2, 0.3, 0.5]
+        - [0.1, 0.3, 0.6]
+        - [0.2, 0.6, 0.2]
+        - [0.0, 0.0, 1.0]
+      alpha: [0.5, 1.0, 2.0, 5.0, 10.0, 20.0, 50.0, 100.0, 1000.0]
+      beta: [0.1, 1.0, 10.0, 100.0, 1000.0]
+
+# Paired group-level comparisons (a - b) reported with bootstrap CIs.
+comparisons:
+  - [B1, B0]
+  - [M1, B1]
+  - [M2, B1]
+  - [M2, M1]
