@@ -1,0 +1,58 @@
+# Milestone 6: quantum-kernel second opinion (local exact simulation; no quantum advantage claimed).
+# The Milestone 5 run and models are read-only inputs; Milestone 5 is not re-run.
+seed: 42
+dataset_dir: data/external/cicids2017
+classical_run_id: 20261006T195110Z-classical-detection-cicids2017
+classical_feature_set: full
+primary_detector: random_forest      # pre-registered in Milestone 5; unchanged
+threshold: 0.5                       # Milestone 5 decision threshold; unchanged
+train_days: [Monday, Tuesday, Wednesday]
+test_days: [Thursday, Friday]
+
+# Uncertainty bands |p - 0.5| <= h. Every h is derived EXCLUSIVELY from training
+# out-of-fold probabilities (leave-one-training-day-out refits of the primary configuration).
+uncertainty:
+  primary_band_coverage: 0.10
+  secondary_band_coverage: 0.05
+
+feature_map_reps: 2                  # zz_feature_map(d, reps=2, entanglement="linear")
+mutual_info_k: 16                    # top-k features by mutual information before PCA(d)
+
+grid:                                # selected by leave-one-training-day-out CV only
+  c: [0.1, 1.0, 10.0, 100.0]
+  alpha: [0.05, 0.1, 0.25, 0.5, 1.0] # quantum-kernel bandwidth (angle multiplier)
+  rbf_gamma: [0.01, 0.03, 0.1, 0.3, 1.0, 3.0]
+
+forest:                              # Milestone 5 random_forest settings, on the same angles
+  n_estimators: 100
+  min_samples_leaf: 2
+  max_features: sqrt
+
+# E2 matched-budget grid (as approved; not to be expanded).
+e2:
+  n_train: [100, 250, 500, 1000, 2000]
+  dims: [4, 6, 8]
+  seeds: [0, 1, 2, 3, 4]
+  test_sample_size: 10000            # one fixed stratified sample of the test days (seed 42)
+  kinds: [zz_qsvm, z_qsvm, rbf_svm, linear_svm, logreg, random_forest]
+
+# E3 second opinion on the uncertainty bands (primary and secondary).
+e3:
+  n_train: 2000
+  n_dims: 8
+  kinds: [rbf_svm, zz_qsvm, z_qsvm]
+
+# E4 reduced noise study (8 settings), ZZ kernel, Aer density-matrix simulation.
+e4:
+  n_train: 200
+  n_test: 200
+  n_dims: 4
+  settings:
+    - {name: shots-256,                shots: 256}
+    - {name: shots-1024,               shots: 1024}
+    - {name: shots-4096,               shots: 4096}
+    - {name: low-noise-1024,           shots: 1024, p1: 0.0001, p2: 0.001, readout: 0.01}
+    - {name: mid-noise-1024,           shots: 1024, p1: 0.001,  p2: 0.01,  readout: 0.01}
+    - {name: mid-noise-ro3-1024,       shots: 1024, p1: 0.001,  p2: 0.01,  readout: 0.03}
+    - {name: high-noise-1024,          shots: 1024, p1: 0.01,   p2: 0.05,  readout: 0.03}
+    - {name: high-noise-4096,          shots: 4096, p1: 0.01,   p2: 0.05,  readout: 0.03}

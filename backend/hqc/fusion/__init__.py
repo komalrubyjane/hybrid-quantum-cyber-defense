@@ -1,4 +1,4 @@
 """Classical/quantum score fusion and disagreement signals.
 
-Status: planned (Milestone 6).
+Status: implemented (Milestone 6).
 """
